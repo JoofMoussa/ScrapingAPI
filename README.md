@@ -3,4 +3,4 @@ in this project we will scrape information from a site, build a POSTGRESQl datab
 ## Project Management
 [Link Trello](https://trello.com/b/cZSIrEWs/conduite-de-projet)
 # first stage
-Scraping the [national supply pharmacy/Pharmacie nationale d'approvisionnement](www.pna.sn) Using Beautifoulsoup, selenium, axios(nodejs)
+Scraping the [national supply pharmacy/Pharmacie nationale d'approvisionnement](https://www.pna.sn/) Using Beautifoulsoup, selenium, axios(nodejs)
