@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Query Results</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Recherche</h1>
+
+    <h2>Query Parameters:</h2>
+    <pre id="query-params"></pre>
+
+    <script>
+        // Retrieve the query parameters from the page URL
+        const queryParams = JSON.parse('<%= query %>');
+
+        // Display the query parameters
+        const queryParamsElement = document.getElementById('query-params');
+        queryParamsElement.textContent = JSON.stringify(queryParams, null, 2);
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head><!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <title>Query Results</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    
+    <body>
+        <h1>Reche</h1>
+    
+        <h2>Query Parameters:</h2>
+        <pre id="query-params"></pre>
+    
+        <script>
+            // Retrieve the query parameters from the page URL
+            const queryParams = JSON.parse('<%= query %>');
+    
+            // Display the query parameters
+            const queryParamsElement = document.getElementById('query-params');
+            queryParamsElement.textContent = JSON.stringify(queryParams, null, 2);
+        </script>
+    </body>
+    
+    </html>
+    <title>Query Results</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Query Results</h1>
+
+    <h2>Medicaments:</h2>
+    <ul id="medicaments-list"></ul>
+
+    <script>
+        // Function to fetch and display medicament data
+        function fetchMedicaments() {
+            fetch('/medicaments')
+                .then(response => response.json())
+                .then(data => {
+                    const medicamentsList = document.getElementById('medicaments-list');
+
+                    data.forEach(medicament => {
+                        const medicamentItem = document.createElement('li');
+                        medicamentItem.textContent = `Medicament ID: ${medicament.id}, Nom Générique: ${medicament.nom_generique}, Nom Standard: ${medicament.nom_standard}, Force: ${medicament.force}, Expiration: ${medicament.expiration}, Entreprise: ${medicament.entreprise}, Date de Production: ${medicament.date_production}`;
+                        medicamentsList.appendChild(medicamentItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Fetch and display medicament data on page load
+        fetchMedicaments();
+    </script>
+</body>
+
+</html> -->
