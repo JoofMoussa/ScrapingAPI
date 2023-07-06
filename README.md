@@ -6,6 +6,6 @@ We are three members (Moussa, Saly & Fatou) . Each one srape two sites and one A
 [Link Trello](https://trello.com/b/T96MVz0R/conduite-de-projet)
 
 # first stage (SCRAPING)
-Scraping the [national supply pharmacy/Pharmacie nationale d'approvisionnement](https://www.pna.sn/) Using Beautifoulsoup ->Moussa
-Scraping  [Drugs.com](https://www.drugs.com/) axios(nodejs) ->Moussa
-SCraping API [DRUG API](https://rapidapi.com/rnelsomain/api/drug-info-and-price-history) -> Moussa
+*  Scraping the [national supply pharmacy/Pharmacie nationale d'approvisionnement](https://www.pna.sn/) Using Beautifoulsoup ->Moussa
+*  Scraping  [Drugs.com](https://www.drugs.com/) axios(nodejs) ->Moussa
+*  SCraping API [DRUG API](https://rapidapi.com/rnelsomain/api/drug-info-and-price-history) -> Moussa
