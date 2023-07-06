@@ -1,0 +1,92 @@
+[
+  {
+    "product_ndc": "59148-008",
+    "generic_name": "ARIPIPRAZOLE",
+    "labeler_name": "Otsuka America Pharmaceutical, Inc.",
+    "brand_name": "ABILIFY",
+    "active_ingredients": [
+      {
+        "name": "ARIPIPRAZOLE",
+        "strength": "10 mg/1"
+      }
+    ],
+    "finished": true,
+    "packaging": [
+      {
+        "package_ndc": "59148-008-13",
+        "description": "30 TABLET in 1 BOTTLE, PLASTIC (59148-008-13)",
+        "marketing_start_date": "20021115",
+        "sample": false
+      },
+      {
+        "package_ndc": "59148-008-35",
+        "description": "100 TABLET in 1 BLISTER PACK (59148-008-35)",
+        "marketing_start_date": "20021115",
+        "sample": false
+      },
+      {
+        "package_ndc": "59148-008-95",
+        "description": "7 TABLET in 1 BLISTER PACK (59148-008-95)",
+        "marketing_start_date": "20021115",
+        "sample": false
+      }
+    ],
+    "listing_expiration_date": "20231231",
+    "openfda": {
+      "manufacturer_name": [
+        "Otsuka America Pharmaceutical, Inc."
+      ],
+      "rxcui": [
+        "349490",
+        "349545",
+        "349547",
+        "349553",
+        "352307",
+        "352308",
+        "352309",
+        "352310",
+        "402131",
+        "404602",
+        "485496",
+        "544412",
+        "602964",
+        "615172",
+        "643019",
+        "643021",
+        "643022",
+        "643023",
+        "672356",
+        "672540"
+      ],
+      "spl_set_id": [
+        "c040bd1d-45b7-49f2-93ea-aed7220b30ac"
+      ],
+      "is_original_packager": [
+        true
+      ],
+      "nui": [
+        "N0000175430"
+      ],
+      "pharm_class_epc": [
+        "Atypical Antipsychotic [EPC]"
+      ],
+      "unii": [
+        "82VFR53I78"
+      ]
+    },
+    "marketing_category": "NDA",
+    "dosage_form": "TABLET",
+    "spl_id": "54fce3dd-d985-44ac-a5d8-d44be28fb2fa",
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "route": [
+      "ORAL"
+    ],
+    "marketing_start_date": "20021115",
+    "product_id": "59148-008_54fce3dd-d985-44ac-a5d8-d44be28fb2fa",
+    "application_number": "NDA021436",
+    "brand_name_base": "ABILIFY",
+    "pharm_class": [
+      "Atypical Antipsychotic [EPC]"
+    ]
+  }
+]
