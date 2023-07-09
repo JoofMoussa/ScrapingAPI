@@ -907,3 +907,219 @@ to three rows of spines running along their entire length. (Harkin &amp; Stewart
                 insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
                 values("Cyphonia clavigera","","","Cyphonia ","","Membracidae","");
             
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple and Pear Insect Control For Homeowners (Codling Moth)","/pests/images/factsheets/labels-archive/pear-apple-codling-moth.jpg","There are few experiences that equal biting into a crisp, flavorful apple; few worse than finding half a worm in the remaining portion. Worms infesting apples and pears are immature larvae of codling moth.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Apple Aphids","/pests/images/factsheets/labels-archive/apple-aphid.jpg","Aphids are common, secondary pests of apples, but infestations resulting in economic loss are uncommon, except for woolly apple aphid. Aphids overwinter as eggs on tree limbs, or as nymphs on roots and/or limbs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Brown Marmorated Stink Bug - Samurai Wasp Parasitoid","/pests/images/factsheets/labels-archive/samurai-wasp.jpg","Brown marmorated stink bug is an invasive insect that first invaded Utah in 2012.  It has since caused urban nuisance problems for northern Utah residents and poses a serious threat to various commerical fruit and vegetable crops. In June 2019, the samurai wasp was discovered in Salt Lake City. This exotic parasitoid wasp is the most promising agent for biological control of BMSB and is uniquely evolved to lay its eggs inside of BMSB eggs.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Bumble Flower Beetle","/pests/images/factsheets/labels-archive/bumble-flower-beetle.jpg","Bumble flower beetles are common throughout the growing season on flowers, oozing sap, and other sweet, overripe, or fermenting matter. Bumble flower beetles seldom warrant the use of chemicals for control.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Cankerworms","/pests/images/factsheets/labels-archive/cankerworms.jpg","Both spring and fall cankerworms occur sporadically in Utah, typically on a five to seven year cycle. Larvae feed for six weeks in the spring and cause heavy defoliation in outbreak years.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer","/pests/images/factsheets/labels-archive/peach-twig-borer.jpg","Peach twig borer is a major pest of peach, nectarine and apricot in Utah. There are multiple generations each year. Spring and early summer generations of larvae bore into and kill new shoots while later summer larvae attack fruit, typically entering fruit near the stem end.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Peach Twig Borer Mating Disruption","/pests/images/factsheets/labels-archive/peach-twig-borer-disruption.jpg","Peach twig borer is a key pest of peach, nectarine, and apricot. Mating disruption does not kill insects; it saturates the orchard with the female moth sex pheromone to delay or prevent mating.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Fruit Sawfly","/pests/images/factsheets/labels-archive/pear-fruit-saw-fly.jpg","Pear fruit sawfly (Hoplocampa brevis) was first identified in Utah in 2015. It is different from another pest of the same name that feeds on foliage--also known as pear slug (Caliroa cerasi)--and feeds exclusively within pear fruitlets in early spring.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Pear Psylla","/pests/images/factsheets/labels-archive/pear-psylla.jpg","Pear psylla is an important pest of pear in Utah. Young and adult psylla feed in leaf phloem tissues, producing sticky honeydew. Psylla can cause fruit russetting and stunt trees; psylla shock and transmission of pear decline can kill trees.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Shothole Borer","/pests/images/factsheets/labels-archive/shothole-borer.jpg","Shothole borers can cause damage to ornamental and fruit trees in Utah and adults are present from spring to early fall. Stressed or injured trees are more prone to attack.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("Spongy Moth","/pests/caps/images/gm-4-5.jpg","Spongy moth is formerly known as European gypsy moth, whose name was changed in 2022 to remove a culturally insensitive term. Spongy moth is among the topmost devastating pests in North America. It has previously been detected and eradicated in Utah.","","","","");
+                
+                insert into insecte(nom,image_url,description_insecte,partie1,partie2,famille,diagnostic)
+                values("White Apple Leafhopper","/pests/images/factsheets/labels-archive/white-apple-leafhopper.jpg","White apple leafhopper is an indirect pest with two generations per year. Decision for control should be based on economic justifications as well as orchard and other pest considerations.","","","","");
+                
