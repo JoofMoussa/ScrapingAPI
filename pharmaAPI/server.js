@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const path = require('path');
 
+
+
 const app = express();
 const port = 8009; // Changement du port
 
@@ -16,7 +18,7 @@ app.get('/', (req, res) => {
     const query = req.query;
 
     // Serve the query.html page with the query parameters
-    res.sendFile(path.join(__dirname, 'public', 'index.html'), {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'),{
         query: JSON.stringify(query),
     });
 });
