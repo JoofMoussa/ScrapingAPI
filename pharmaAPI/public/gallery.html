@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clinic</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/global.css" rel="stylesheet">
+	<link href="css/gallery.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+	<script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  
+<body>
+<div class="main_o clearfix">
+ <section id="top">
+	<div class="container">
+	 <div class="row">
+	  <div class="top_1 clearfix">
+	   <div class="col-sm-6 space_all">
+		<div class="top_1l clearfix">
+		 <div class="col-sm-7 space_left">
+		   <p class="mgt col">Location:121 Wallstreet Street, NY , USA</p>
+		 </div>
+		 <div class="col-sm-5 space_left">
+		   <p class="mgt col">Email: <a class="col" href="#">info@gmail.com</a></p>
+		 </div>
+		</div>
+	   </div>
+	   <div class="col-sm-6 space_all">
+		<div class="top_1r clearfix">
+		 <div class="col-sm-6 space_left">
+		  <p class="mgt col">For emergency cases: <a class="col" href="#">123 456 78 90</a></p>
+		 </div>
+		 <div class="col-sm-5 space_left">
+		   <ul class="social-network social-circle mgt">
+							<li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+							<li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+						</ul>
+		 </div>
+		 <div class="col-sm-1 space_left">
+		   <ul class="nav navbar-nav navbar-right nav_1">
+					<li class="dropdown"><a class="m_tag" href="#" data-toggle="dropdown"><span class="fa fa-search"></span></a>
+									<ul class="dropdown-menu drop_1" style="min-width: 300px;">
+										<li>
+											<div class="row_1">
+												<div class="col-sm-12">
+													<form class="navbar-form navbar-left" role="search">
+													<div class="input-group">
+														<input type="text" class="form-control" placeholder="Search">
+														<span class="input-group-btn">
+															<button class="btn btn-primary" type="button">
+																Search</button>
+														</span>												</div>
+													</form>
+												</div>
+											</div>
+										</li>
+									</ul>
+				  </li>
+		   </ul>
+		 </div>
+		</div>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+   </section>
+   
+ <section id="header" class="cd-secondary-nav">
+	<nav class="navbar nav_o">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><i class="fa fa-hospital-o"></i> <span class="bold">MED</span> CLINIC </a>
+			</div>
+	
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+				<li><a class="m_tag" href="index.html">Home</a></li>
+				<li><a class="m_tag" href="shop.html">Shop</a></li>
+				<li><a class="m_tag" href="detail.html">Detail</a></li>
+				<li><a class="m_tag" href="department.html">Department</a></li>
+				<li><a class="m_tag active_tab" href="gallery.html">Gallery</a></li>
+				<li><a class="m_tag" href="contact.html">Contact</a></li>
+				<li class="dropdown dropdown-large">
+				<a href="#" class="dropdown-toggle m_tag" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+				
+				<ul class="dropdown-menu dropdown-menu-large row">
+					<li class="col-sm-3">
+						<ul>
+							<li class="dropdown-header">Glyphicons</li>
+							<li><a href="#">Available glyphs</a></li>
+							<li class="disabled"><a href="#">How to use</a></li>
+							<li><a href="#">Examples</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Dropdowns</li>
+							<li><a href="#">Example</a></li>
+							<li><a href="#">Aligninment options</a></li>
+							<li><a href="#">Headers</a></li>
+							<li><a href="#">Disabled menu items</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li class="dropdown-header">Button groups</li>
+							<li><a href="#">Basic example</a></li>
+							<li><a href="#">Button toolbar</a></li>
+							<li><a href="#">Sizing</a></li>
+							<li><a href="#">Nesting</a></li>
+							<li><a href="#">Vertical variation</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Button dropdowns</li>
+							<li><a href="#">Single button dropdowns</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li class="dropdown-header">Input groups</li>
+							<li><a href="#">Basic example</a></li>
+							<li><a href="#">Sizing</a></li>
+							<li><a href="#">Checkboxes and radio addons</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Navs</li>
+							<li><a href="#">Tabs</a></li>
+							<li><a href="#">Pills</a></li>
+							<li><a href="#">Justified</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li class="dropdown-header">Navbar</li>
+							<li><a href="#">Default navbar</a></li>
+							<li><a href="#">Buttons</a></li>
+							<li><a href="#">Text</a></li>
+							<li><a href="#">Non-nav links</a></li>
+							<li><a href="#">Component alignment</a></li>
+							<li><a href="#">Fixed to top</a></li>
+							<li><a href="#">Fixed to bottom</a></li>
+							<li><a href="#">Static top</a></li>
+							<li><a href="#">Inverted navbar</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+			</li>
+			    <li class="dropdown dropdown-large">
+				<a href="#" class="dropdown-toggle m_tag" data-toggle="dropdown">More<b class="caret"></b></a>
+				
+				<ul class="dropdown-menu dropdown-menu-large row drop_2">
+					<li class="col-sm-3">
+						<ul>
+							<li><a href="#"><img src="img/4.jpg" class="iw" alt="abc"></a></li>
+							<li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Sed Augue</span></a></li>
+							<li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li><a href="#"><img src="img/5.jpg" class="iw" alt="abc"></a></li>
+							<li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Nibh Elementum</span></a></li>
+							<li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li><a href="#"><img src="img/6.jpg" class="iw" alt="abc"></a></li>
+							<li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Nulla Quis</span></a></li>
+							<li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
+						</ul>
+					</li>
+					<li class="col-sm-3">
+						<ul>
+							<li><a href="#"><img src="img/7.jpg" class="iw" alt="abc"></a></li>
+							<li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Ante Dapibus</span></a></li>
+							<li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
+						</ul>
+					</li>
+		
+				</ul>
+				
+			</li>
+				<li><a class="button mgt" href="#"> MAKE AN APPOINTMENT</a></li>
+			</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	</section>
+</div>
+
+<section id="gallery">
+ <div class="container">
+  <div class="row">
+    <div class="gallery_1 text-center clearfix">
+	 <div class="col-sm-12">
+	  <h1 class="mgt">Gallery</h1>
+	 </div>
+	</div>
+    <div class="center_detail_2_right_inner_2 clearfix">
+		        <ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#home_description">All</a></li>
+			  <li class=""><a data-toggle="tab" href="#menu_information">Cardiology</a></li>
+			  <li class=""><a data-toggle="tab" href="#menu_review">Pediatric</a></li>
+			  <li><a data-toggle="tab" href="#menu_1">Traumatology</a></li>
+			  <li class=""><a data-toggle="tab" href="#menu_2">Neurology</a></li>
+			  <li class=""><a data-toggle="tab" href="#menu_3">Pulmonary</a></li>
+			  <li class=""><a data-toggle="tab" href="#menu_4">X-ray</a></li>
+           </ul>
+
+				<div class="tab-content clearfix">
+				  <div id="home_description" class="tab-pane fade clearfix active in">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/39.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/40.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/41.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/42.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+					   <div class="click_inner clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/43.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/44.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/45.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/46.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+					   <div class="click_inner clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/47.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/48.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/49.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/50.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_information" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/43.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/44.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/45.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/46.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_review" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/47.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/48.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/49.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/50.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_1" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/39.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/40.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/41.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/42.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_2" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/43.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/44.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/45.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/46.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_3" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+						   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/47.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/48.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/49.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/50.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+				    </div>
+				  </div>
+				  <div id="menu_4" class="tab-pane fade clearfix">
+					 <div class="click clearfix">
+					   <div class="click_inner mgt clearfix">
+					     <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/39.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/40.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/41.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+						 <div class="col-sm-3 space_left">
+						  <div class="click_inner_i clearfix">
+						   <a href="#"><img src="img/42.jpg" class="iw" alt="abc"></a>
+						  </div>
+						 </div>
+					   </div>
+					    </div>
+				  </div>
+				</div>
+		</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="footer">
+ <div class="container">
+  <div class="row">
+   <div class="footer_1 clearfix">
+    <div class="col-sm-5">
+	 <div class="footer_1l clearfix">
+	  <div class="input-group">
+		<input type="text" class="form-control" placeholder="Your Email">
+		<span class="input-group-btn">
+			<button class="btn btn-primary" type="button">
+				<i class="fa fa-envelope-o"></i></button>
+		</span>												
+	  </div>
+	 </div>
+	</div>
+	<div class="col-sm-6">
+	 <div class="footer_1r text-right clearfix">
+	  <ul class="social-network social-circle mgt">
+							<li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+							<li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+	  </ul>
+	 </div>
+	</div>
+   </div>
+   <div class="footer_2 clearfix">
+    <div class="col-sm-3">
+	 <div class="footer_2i clearfix">
+	    <a class="navbar-brand" href="index.html"><i class="fa fa-hospital-o"></i> <span class="bold">MED</span> CLINIC </a>
+	    <p class="col">Choosing the right hospital and physician are important factors to consider that significantly influence a patient’s treatment. The preferred choice for many patients is choosing private care.</p>
+	 </div>
+	</div>
+	<div class="col-sm-3">
+	 <div class="footer_2i1 clearfix">
+	  <h4 class="mgt col">Departments</h4>
+	  <hr>
+	  <ul>
+	   <li><a class="col" href="#">Neurology</a></li>
+	   <li><a class="col" href="#">Traumotology</a></li>
+	   <li><a class="col" href="#">Gynaecology</a></li>
+	   <li><a class="col" href="#">Nephrology</a></li>
+	   <li><a class="col" href="#">Cardiology</a></li>
+	   <li><a class="col" href="#">Pulmonary</a></li>
+	  </ul>
+	 </div>
+	</div>
+	<div class="col-sm-3">
+	 <div class="footer_2i1 clearfix">
+	  <h4 class="mgt col">Head Office</h4>
+	  <hr>
+	  <p class="col">1096 N Highland St, Arlington
+VA 130xz, USA<br>
+info@gmail.com<br>
+123 4567 89 01</p>
+     <p class="col">Mon-Thu: 9:30 – 21:00<br>
+Fri: 6:00 – 21:00<br>
+Sat: 10:00 – 15:00</p>
+	 </div>
+	</div>
+	<div class="col-sm-3">
+	 <div class="footer_2i1 clearfix">
+	  <h4 class="mgt col">Quick Links</h4>
+	  <hr>
+	  <ul>
+	   <li><a class="col" href="#">Gallery</a></li>
+	   <li><a class="col" href="#">FAQs</a></li>
+	   <li><a class="col" href="#">Contacts</a></li>
+	  </ul>
+	 </div>
+	</div>
+   </div>
+   <div class="footer_3 clearfix">
+	 <div class="col-sm-6">
+	  <div class="footer_3l clearfix">
+       <p class="mgt col">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
+	  </div>
+	 </div>
+	 <div class="col-sm-6">
+	  <div class="footer_3r clearfix">
+       <ul class="mgt">
+	    <li><a href="#">Home</a></li>
+		<li><a href="#">What we do</a></li>
+		<li><a href="#">About</a></li>
+		<li><a href="#">FAQ</a></li>
+		<li><a href="#">Get involved</a></li>
+		<li><a href="#">Team</a></li>
+		<li><a href="#">News</a></li>
+		<li><a href="#">Contacts</a></li>
+	   </ul>
+	  </div>
+	 </div>
+	</div>
+  </div>
+ </div>
+</section>
+
+<script>
+$(document).ready(function(){
+
+/*****Fixed Menu******/
+var secondaryNav = $('.cd-secondary-nav'),
+   secondaryNavTopPosition = secondaryNav.offset().top;
+	$(window).on('scroll', function(){
+		if($(window).scrollTop() > secondaryNavTopPosition ) {
+			secondaryNav.addClass('is-fixed');	
+		} else {
+			secondaryNav.removeClass('is-fixed');
+		}
+	});	
+	
+});
+</script>
+
+</body>
+ 
+</html>

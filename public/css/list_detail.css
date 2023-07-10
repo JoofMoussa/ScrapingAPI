@@ -1,0 +1,341 @@
+/*
+Template Name:Directory Tour
+File: Layout CSS
+Author: Templates On Web
+Author URI: http://templateonweb.com/
+Licence: <a href="http://www.templateonweb.com/terms.php?v=content&contentid=152">Website Template Licence</a>
+*/
+/*********************center_home****************/
+.center_home{
+background-image: url(../img/9.jpg);
+background-position:center; 
+  }
+.center_hm{
+ background:#00000073;
+ padding-top:120px;
+ padding-bottom:170px;
+ }
+.center_list h1{
+ font-size:60px;
+ }
+ 
+.center_list_i .pdr{
+margin-right:10px;
+display:inline-block; 
+ }
+.center_list_i .form-control{
+ height:50px;
+ margin-top:5px;
+ font-size:16px;
+ }
+.center_list_i .form_1{
+width:130px; 
+ }
+.center_list_i .form_2{
+width:350px; 
+ }
+.center_list_i .m_tag_1{
+background:#1779d3;
+padding:16px 40px 14px 40px; 
+color:#fff;
+font-size:18px;
+margin-top:16px;
+border-radius:4px;
+ }
+
+/*********************center_home_end****************/
+
+/*********************serv_h****************/
+.serv_h1i span{
+font-size:60px;
+color:#1779d3;
+ }
+.serv_h1i{
+background:#fff;
+padding:20px 15px;
+box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+border-radius:3px;
+ }
+.serv_h1i:hover{
+background:#f4f4f4; 
+ }
+.serv_h1{
+margin-top:-50px; 
+ }
+#serv_h{
+padding-bottom:50px; 
+ }
+/*********************serv_h_end****************/
+
+/*********************find****************/
+#find{
+background:#f4f4f4;
+padding-top:40px;
+padding-bottom:40px; 
+ }
+.find_2ii{
+ background:#fff;
+ padding:20px 10px;
+ box-shadow: 0 0 10px rgba(0,0,0,0.6);
+ }
+.find_2ii h5 span{
+color:#999;
+font-size:14px;
+display:inline-block;
+margin-top:2px; 
+ }
+.find_2{
+margin-top:30px; 
+ }
+/*********************find_end****************/
+
+/*********************explore****************/
+#explore{
+padding-top:40px;
+padding-bottom:40px; 
+ }
+ 
+.detail_hr3i1 h6 span{
+ background:#ffe500;
+ width:30px;
+ height:30px;
+ display:inline-block;
+ line-height:30px;
+ text-align:center;
+ margin-right:5px;
+ border-radius:4px;
+ }
+.detail_hr3i1 h6 i{
+ background:#ffe500;
+ width:20px;
+ height:20px;
+ display:inline-block;
+ line-height:18px;
+ text-align:center;
+ border-radius:4px;
+ font-size:12px;
+ border:1px solid;
+ }
+ 
+.detail_hr3i{
+ position:relative;
+ background-image: url(../img/49.jpg);
+ background-position: center;
+ }
+.detail_hr3i_o{
+ position:relative;
+ background-image: url(../img/50.jpg);
+ background-position: center;
+ }
+.detail_hr3i_o1{
+ position:relative;
+ background-image: url(../img/51.jpg);
+ background-position: center;
+ }
+.detail_hr3i_o2{
+ position:relative;
+ background-image: url(../img/52.jpg);
+ background-position: center;
+ }
+.detail_hr3i_o3{
+ position:relative;
+ background-image: url(../img/53.jpg);
+ background-position: center;
+ }
+.detail_hr3i2 h5{
+background:#009900; 
+padding:5px;
+border-radius:3px;
+width:60px;
+text-align:center;
+font-weight:bold;
+color:#fff;
+ }
+.detail_hr3i2{
+position:absolute;
+top:0;
+right:10px;
+ }
+.detail_hr3i1{
+background:#0000007d;
+padding:208px 15px 15px 15px;
+ }
+.detail_hr3i1_o{
+background:#0000007d;
+padding:75px 15px 15px 15px;
+ }
+.explore_1r{
+margin-top:20px; 
+ }
+.explore_1{
+ margin-top:30px;
+ }
+/*********************explore_end****************/
+
+/*********************ternding****************/
+#trending{
+ background:#f4f4f4;
+ padding-top:40px;
+ padding-bottom:40px;
+ }
+ 
+ .detail_hli2r h6 span{
+ background:#009900;
+ width:30px;
+ height:30px;
+ display:inline-block;
+ line-height:30px;
+ text-align:center;
+ margin-right:5px;
+ border-radius:4px;
+ color:#fff;
+ }
+.detail_hli2r h6 i{
+ background:#009900;
+ width:20px;
+ height:20px;
+ display:inline-block;
+ line-height:18px;
+ text-align:center;
+ border-radius:4px;
+ font-size:12px;
+ border:1px solid;
+ color:#fff;
+ }
+ 
+.detail_hli2r .amt_1 li{
+display:inline-block;
+margin-right:3px;
+font-size:16px;
+margin-bottom:5px;
+ }
+.detail_hli2r .amt_1 li a{
+border:1px solid #ddd;
+padding:8px 12px 5px 12px;
+ }
+.detail_hli2r .amt_1 li a i{
+margin-right:5px;
+ }
+.detail_hli2i{
+padding:15px 10px 10px 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.6);
+background:#fff;
+margin-top:20px; 
+ }
+/*********************explore_end****************/
+
+/*********************account****************/
+#account{
+padding-top:40px;
+padding-bottom:40px;
+background:#fafafa; 
+ }
+.account_1li span i{
+font-size:60px; 
+line-height:0.8em;
+color:#F44336;
+ }
+.account_1{
+margin-top:30px; 
+ }
+.account_1l{
+ margin-top:20px;
+ }
+.account_1li{
+text-align:center; 
+ }
+.account_1r{
+ background:#f1ebeb;
+ padding:25px 40px 40px 40px;
+ }
+.account_1r .form-control{
+margin-top:15px;
+height:50px;
+border-radius:0;
+font-size:16px;
+ }
+.account_1r p .check_1{
+margin-right:5px; 
+ }
+/*********************account_end****************/
+
+@media screen and (max-width : 767px){
+.center_list_i .pdr a{
+display:block;
+ }
+.center_list_i .form_1{
+width:auto; 
+ }
+.center_list_i .form_2{
+width:auto; 
+ }
+.center_list h1{
+font-size:40px; 
+ }
+.center_list{
+padding-left:10px;
+padding-right:10px; 
+ }
+.serv_h1{
+margin-top:20px; 
+ }
+.center_hm{
+ padding-top:50px;
+ padding-bottom:50px;
+ }
+.serv_h1i{
+margin-top:20px; 
+ }
+.find_2i{
+margin-bottom:10px; 
+ }
+.explore_1l{
+margin-top:10px;
+text-align:center; 
+ }
+#trending{
+text-align:center; 
+ }
+.detail_hli2r{
+margin-top:10px; 
+ }
+.detail_hli2r .amt_1 li{
+ margin-bottom:20px;
+ }
+#account{
+text-align:center; 
+ }
+.account_1li1{
+ margin-top:10px;
+ }
+.account_1r{
+margin-top:15px; 
+ }
+}
+
+@media (min-width:768px) and (max-width:991px) {
+.detail_hr3i1_o {
+    padding: 56px 15px 15px 15px;
+}
+.detail_hli2r .amt_1 li a{
+display: block; 
+ }
+.account_1li span i{
+font-size:40px; 
+ }
+ }
+@media (min-width:992px) and (max-width:1200px) {
+.detail_hli2r .amt_1 li a{
+display: block; 
+ }
+.account_1li span i{
+font-size:50px; 
+ }
+ }
+@media (min-width:1201px) and (max-width:1340px) {
+
+ }
+
+
+
+

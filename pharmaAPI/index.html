@@ -1,79 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <title>Medicaments API</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>API Consumption</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
 </head>
-
 <body>
-    <h1>Medicaments API</h1>
+  <h1>API Data:</h1>
+  <div id="result"></div>
 
-    <!-- Form for creating a new medicament -->
-    <h2>Create a New Medicament</h2>
-    <form id="create-form">
-        <label for="nom_generique">Nom Générique:</label>
-        <input type="text" id="nom_generique" required>
-        <br>
-        <label for="nom_standard">Nom Standard:</label>
-        <input type="text" id="nom_standard" required>
-        <br>
-        <label for="force">Force:</label>
-        <input type="text" id="force">
-        <br>
-        <label for="expiration">Expiration:</label>
-        <input type="date" id="expiration">
-        <br>
-        <label for="entreprise">Entreprise:</label>
-        <input type="text" id="entreprise">
-        <br>
-        <label for="date_production">Date de Production:</label>
-        <input type="date" id="date_production">
-        <br>
-        <button type="submit">Create</button>
-    </form>
+  <script>
+    // Make an AJAX request to the API endpoint
+    fetch('/medicaments')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('An error occurred');
+        }
+      })
+      .then(data => {
+        displayData(data);
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle error scenario
+      });
 
-    <!-- Form for updating an existing medicament -->
-    <h2>Update a Medicament</h2>
-    <form id="update-form">
-        <label for="medicament-id">Medicament ID:</label>
-        <input type="text" id="medicament-id" required>
-        <br>
-        <!-- Add input fields for the fields you want to update -->
-        <label for="updated-nom_generique">Updated Nom Générique:</label>
-        <input type="text" id="updated-nom_generique">
-        <br>
-        <label for="updated-nom_standard">Updated Nom Standard:</label>
-        <input type="text" id="updated-nom_standard">
-        <br>
-        <label for="updated-force">Updated Force:</label>
-        <input type="text" id="updated-force">
-        <br>
-        <label for="updated-expiration">Updated Expiration:</label>
-        <input type="date" id="updated-expiration">
-        <br>
-        <label for="updated-entreprise">Updated Entreprise:</label>
-        <input type="text" id="updated-entreprise">
-        <br>
-        <label for="updated-date_production">Updated Date de Production:</label>
-        <input type="date" id="updated-date_production">
-        <br>
-        <button type="submit">Update</button>
-    </form>
-
-    <!-- Form for deleting a medicament -->
-    <h2>Delete a Medicament</h2>
-    <form id="delete-form">
-        <label for="delete-medicament-id">Medicament ID:</label>
-        <input type="text" id="delete-medicament-id" required>
-        <br>
-        <button type="submit">Delete</button>
-    </form>
-
-    <!-- Display area for medicaments -->
-    <div id="medicaments-container"></div>
-
-    <script src="script.js"></script>
+    // Display the received data on the webpage
+    function displayData(data) {
+      const resultContainer = document.getElementById('result');
+      data.forEach(item => {
+        const { id, idtypemed, categorie } = item;
+        const pElement = document.createElement('p');
+        pElement.textContent = `ID: ${id}, ID Type Med: ${idtypemed}, Categorie: ${categorie}`;
+        resultContainer.appendChild(pElement);
+      });
+    }
+  </script>
 </body>
-
 </html>

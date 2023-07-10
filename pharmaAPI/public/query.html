@@ -1,89 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Query Results</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-
-<body>
-    <h1>Recherche</h1>
-
-    <h2>Query Parameters:</h2>
-    <pre id="query-params"></pre>
-
-    <script>
-        // Retrieve the query parameters from the page URL
-        const queryParams = JSON.parse('<%= query %>');
-
-        // Display the query parameters
-        const queryParamsElement = document.getElementById('query-params');
-        queryParamsElement.textContent = JSON.stringify(queryParams, null, 2);
-    </script>
-</body>
-
-</html>
-
 <!-- <!DOCTYPE html>
-<html lang="en">
-
-<head><!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <title>Query Results</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
-    
-    <body>
-        <h1>Reche</h1>
-    
-        <h2>Query Parameters:</h2>
-        <pre id="query-params"></pre>
-    
-        <script>
-            // Retrieve the query parameters from the page URL
-            const queryParams = JSON.parse('<%= query %>');
-    
-            // Display the query parameters
-            const queryParamsElement = document.getElementById('query-params');
-            queryParamsElement.textContent = JSON.stringify(queryParams, null, 2);
-        </script>
-    </body>
-    
-    </html>
-    <title>Query Results</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+<html>
+<head>
+  <title>API Consumption</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add your custom styles here */
+  </style>
 </head>
-
 <body>
-    <h1>Query Results</h1>
-
-    <h2>Medicaments:</h2>
-    <ul id="medicaments-list"></ul>
-
-    <script>
-        // Function to fetch and display medicament data
-        function fetchMedicaments() {
-            fetch('/medicaments')
-                .then(response => response.json())
-                .then(data => {
-                    const medicamentsList = document.getElementById('medicaments-list');
-
-                    data.forEach(medicament => {
-                        const medicamentItem = document.createElement('li');
-                        medicamentItem.textContent = `Medicament ID: ${medicament.id}, Nom Générique: ${medicament.nom_generique}, Nom Standard: ${medicament.nom_standard}, Force: ${medicament.force}, Expiration: ${medicament.expiration}, Entreprise: ${medicament.entreprise}, Date de Production: ${medicament.date_production}`;
-                        medicamentsList.appendChild(medicamentItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+  <h1>API Data:</h1>
+  <div class="container">
+  <div id="result" class="card-deck"></div>
+</div>
+  <script>
+    // Make an AJAX request to the API endpoint
+    fetch('/medicaments')
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('An error occurred');
         }
+      })
+      .then(function(data) {
+        displayData(data);
+      })
+      .catch(function(error) {
+        console.error(error);
+        // Handle error scenario
+      });
 
-        // Fetch and display medicament data on page load
-        fetchMedicaments();
-    </script>
+    // Display the received data on the webpage
+    function displayData(data) {
+      var resultContainer = document.getElementById('result');
+      data.forEach(function(item) {
+        var id = item.id;
+        var idtypemed = item.idtypemed;
+        var categorie = item.categorie;
+
+        // Create Bootstrap card element
+        var cardcontent = document.createElement('div');
+        cardcontent.className = 'col-lg-3';
+        // Create Bootstrap card element
+        var card = document.createElement('div');
+        card.className = 'card';
+        
+        // Create card body
+        var cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+        
+        // Create card title
+        var cardTitle = document.createElement('h5');
+        cardTitle.className = 'card-title';
+        cardTitle.textContent = 'ID: ' + id;
+        
+        // Create card text
+        var cardText = document.createElement('p');
+        cardText.className = 'card-text';
+        cardText.textContent = 'ID Type Med: ' + idtypemed + ', Categorie: ' + categorie;
+        
+        // Append card title and text to card body
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardText);
+        
+        // Append card body to card
+        card.appendChild(cardBody);
+        cardcontent.appendChild(card);
+        
+        // Append card to result container
+        resultContainer.appendChild(cardcontent);
+      });
+    }
+  </script>
 </body>
+</html>
+ -->
 
-</html> -->
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>API Consumption</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add your custom styles here */
+  </style>
+</head>
+<body>
+  <h1>API Data:</h1>
+  <div class="container">
+    <div id="result" class="row"></div>
+    <nav aria-label="Card Pagination">
+      <ul id="pagination" class="pagination justify-content-center"></ul>
+    </nav>
+  </div>
+  <script>
+    var currentPage = 1; // Current page number
+    var cardsPerPage = 9; // Number of cards to display per page
+    var data; // Stores the API data
+
+    // Make an AJAX request to the API endpoint
+    fetch('/medicaments')
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('An error occurred');
+        }
+      })
+      .then(function(responseData) {
+        data = responseData;
+        displayData(currentPage);
+        createPagination();
+      })
+      .catch(function(error) {
+        console.error(error);
+        // Handle error scenario
+      });
+
+    // Display the data for the specified page
+    function displayData(page) {
+      var startIndex = (page - 1) * cardsPerPage;
+      var endIndex = page * cardsPerPage;
+      var resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = ''; // Clear the result container
+
+      data.slice(startIndex, endIndex).forEach(function(item) {
+        var id = item.id;
+        var idtypemed = item.idtypemed;
+        var categorie = item.categorie;
+
+        // Create Bootstrap card element
+        var cardColumn = document.createElement('div');
+        cardColumn.className = 'col-lg-3 mb-4';
+
+        var card = document.createElement('div');
+        card.className = 'card';
+
+        var cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        var cardTitle = document.createElement('h5');
+        cardTitle.className = 'card-title';
+        cardTitle.textContent = 'ID: ' + id;
+
+        var cardText = document.createElement('p');
+        cardText.className = 'card-text';
+        cardText.textContent = 'ID Type Med: ' + idtypemed + ', Categorie: ' + categorie;
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardText);
+        card.appendChild(cardBody);
+        cardColumn.appendChild(card);
+        resultContainer.appendChild(cardColumn);
+      });
+    }
+
+    // Create pagination controls
+    function createPagination() {
+      var totalPages = Math.ceil(data.length / cardsPerPage);
+      var paginationContainer = document.getElementById('pagination');
+      paginationContainer.innerHTML = ''; // Clear the pagination container
+
+      for (var i = 1; i <= totalPages; i++) {
+        var pageItem = document.createElement('li');
+        pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
+
+        var pageLink = document.createElement('a');
+        pageLink.className = 'page-link';
+        pageLink.href = '#';
+        pageLink.textContent = i;
+        pageLink.addEventListener('click', function(event) {
+          event.preventDefault();
+          currentPage = parseInt(event.target.textContent);
+          displayData(currentPage);
+          updatePagination();
+        });
+
+        pageItem.appendChild(pageLink);
+        paginationContainer.appendChild(pageItem);
+      }
+    }
+
+    // Update pagination controls when the page changes
+    function updatePagination() {
+      var paginationItems = document.querySelectorAll('#pagination .page-item');
+      paginationItems.forEach(function(item) {
+        var pageLink = item.querySelector('.page-link');
+        var pageNumber = parseInt(pageLink.textContent);
+        if (pageNumber === currentPage) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

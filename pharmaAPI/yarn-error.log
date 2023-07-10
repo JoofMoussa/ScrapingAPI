@@ -2,7 +2,7 @@ Arguments:
   /usr/local/bin/node /snap/node/7588/bin/yarn.js global dir --json
 
 PATH: 
-  /home/kala/bin:/home/kala/Documents/anaconda3/bin:/home/kala/Documents/anaconda3/condabin:/home/kala/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+  /home/kala/bin:/home/kala/Documents/anaconda3/bin:/home/kala/Documents/anaconda3/condabin:/home/kala/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/bin/Postman
 
 Yarn version: 
   1.22.19
