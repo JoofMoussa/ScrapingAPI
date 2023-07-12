@@ -79,14 +79,13 @@
         <section id="header" class="cd-secondary-nav">
             <nav class="navbar">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header page-scroll">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <a class="navbar-brand" href="index.html"><span class="bold greenyel" >BI<i class="fa fa-globe text-success greenyel"></i></span>DATA</a>
                     </div>
 
@@ -95,10 +94,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="m_tag active_tab" href="index.html">Acceuil</a></li>
                             <li><a class="m_tag" href="pharma.html">Pharmacie</a></li>
-                            <!-- <li><a class="m_tag" href="detail.html">Detail</a></li> -->
                             <li><a class="m_tag" href="meteo.html">Meteo</a></li>
                             <li><a class="m_tag" href="insecte.html">Insecte</a></li>
-                            <li><a class="m_tag" href="gallery.html">Gallery</a></li>
+                            <li><a class="m_tag" href="gallery.html">Galerie</a></li>
                             <li><a class="m_tag" href="contact.html">Contact</a></li>
                             <li class="dropdown dropdown-large">
                                 <a href="#" class="dropdown-toggle m_tag" data-toggle="dropdown">Qui sommes nous ?<b class="caret"></b></a>
@@ -109,7 +107,7 @@
                                             <li>
                                                 <a href="#"><img src="img/4.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Sed Augue</span></a></li>
+                                            <li><a href="#"> TEAM <br> <span class="bold">SALIMATA YAYA BA</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -119,7 +117,7 @@
                                             <li>
                                                 <a href="#"><img src="img/5.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Nibh Elementum</span></a></li>
+                                            <li><a href="#"> TEAM  <br> <span class="bold">FATOU THIAM</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -130,7 +128,7 @@
                                             <li>
                                                 <a href="#"><img src="img/7.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Ante Dapibus</span></a></li>
+                                            <li><a href="#"> TEAM  <br> <span class="bold">MOUSSA DIOUF</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -147,9 +145,7 @@
                             </div>
                         </ul>
                     </div>
-                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.container-fluid -->
             </nav>
         </section>
     </div>
@@ -163,13 +159,13 @@
                     <div class="col-sm-3 bg_1">
                         <div class="shop_1l1 clearfix">
                             <h3 class="col_1 mgt">Rechercher un produit</h3>
-                            <form id="rechercheProduit"></form>
-                            <div class="input-group">
-                                <input type="text" id="nomprod" name="nomprod" class="form-control" placeholder="Chercher">
-                                <span class="input-group-btn">
-								<button class="btn btn-primary" type="button">
+                            <form id="rechercheProduit">
+                                <div class="input-group">
+                                    <input type="text" id="nomprod" name="nomprod" class="form-control" placeholder="Chercher">
+                                    <span class="input-group-btn">
+								<button class="btn btn-primary" type="submit">
 									Go</button></span>
-                            </div>
+                                </div>
                             </form>
                         </div>
                         <br>
@@ -197,7 +193,7 @@
                             <h3 class="mgt col_1">Produits Moins chers</h3>
                             <div class="shop_1li clearfix">
                                 <div class="col-sm-3 space_left">
-                                    <img src="img/14.jpg" class="iw" alt="abc">
+                                    <img class="iw img img-responsive img-thumbnail" src="produits/040410.jpo">
                                 </div>
                                 <div class="col-sm-9">
                                     <h6 class="mgt"><a href="detail.html">Comprime</a></h6>
@@ -211,7 +207,7 @@
                             <h3 class="mgt col_1">Produits Plus chers</h3>
                             <div class="shop_1li clearfix">
                                 <div class="col-sm-3 space_left">
-                                    <img src="img/14.jpg" class="iw" alt="abc">
+                                    <img class="iw img img-responsive img-thumbnail" src="produits/501741.jpo">
                                 </div>
                                 <div class="col-sm-9">
                                     <h6 class="mgt"><a href="detail.html">Injectable</a></h6>
@@ -227,23 +223,29 @@
                                 <h1 class="mgt text-success">Pharmacie</h1>
                                 <select class="form-control" id="subject" name="subject">
 								<option>Tri par defaut</option>
-								<option>Modele</option>
-								<option>Prix</option>
-								<option>Conditionnement</option>
-								<option>Forme</option>
 								</select>
                             </div>
                             <div class="col-sm-4 space_left">
+
                                 <p class="text-right" id="page-display"></p>
                             </div>
                         </div>
-
-                        <div id="result"></div>
-
+                        <div class="row">
+                            <br>
+                            <center>
+                                <label class="label label-success" id="selectOption" style="font-size: 25px;"></label>
+                            </center>
+                            <br>
+                            <div class="row">
+                                <div id="result"></div>
+                            </div>
+                        </div>
                         <div class="text-center shop_1r2 clearfix">
-                            <nav aria-label="Card Pagination">
-                                <ul id="pagination" class="pagination justify-content-center"></ul>
-                            </nav>
+                            <div class="row">
+                                <nav aria-label="Card Pagination">
+                                    <ul id="pagination" class="pagination justify-content-center"></ul>
+                                </nav>
+                            </div>
                             <!-- <ul class="pagination">
                                 <li class="disabled"><a href="detail.html">«</a></li>
                                 <li class="active"><a href="detail.html">1 <span class="sr-only">(current)</span></a></li>
@@ -275,23 +277,23 @@
                     <div class="modal-body">
                         <form id="loginForm">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                <label for="username">username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Entrer votre nom utilisateur">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                <input type="password" class="form-control" id="password" placeholder="Entrer votremot de passe">
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmer mot de passe">
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>
                                 <select class="form-control" id="role">
                                     <option value="admin">Admin</option>
-                                    <option value="visitor">Visitor</option>
-                                    <option value="editor">Editor</option>
+                                    <option value="visitor">Visiteur</option>
+                                    <option value="editor">Editeur</option>
 							    </select>
                             </div>
 
@@ -390,7 +392,6 @@
 
     <script>
         $(document).ready(function() {
-            /*****Fixed Menu******/
             var secondaryNav = $('.cd-secondary-nav'),
                 secondaryNavTopPosition = secondaryNav.offset().top;
             $(window).on('scroll', function() {
@@ -404,7 +405,7 @@
         });
 
         //Tri par defaut
-        fetch('/formeproduitpharma')
+        fetch('/api/v1/formeproduitpharma')
             .then(function(response) {
                 if (response.ok) {
                     return response.json();
@@ -424,7 +425,6 @@
             var selectContent = document.getElementById('subject');
             selectContent.innerHTML = '';
             toutformes.forEach(function(formedata) {
-                console.log(formedata);
                 var formevalue = formedata.forme;
                 var opts = document.createElement('option');
                 opts.textContent = formevalue;
@@ -436,30 +436,6 @@
         //Fin Tri par defaut
 
 
-        //Recherche de produit
-        document.getElementById('rechercheProduit').addEventListener('submit', function(event) {
-            event.preventDefault(); // 
-            var nomprod = document.getElementById('nomprod').value;
-            var data = {
-                nomprod: nomprod
-            };
-            fetch('api/produitpharma', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Il y'a une erreur");
-                }
-            })
-
-        });
-
-        //Fin recherche de produit
 
 
         document.getElementById('dropdownMenuButton').addEventListener('click', function(event) {
@@ -469,21 +445,21 @@
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // 
 
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
+            var username = document.getElementById('username').value;
+            var mot_de_passe = document.getElementById('password').value;
             var role = document.getElementById('role').value;
             var confirmPassword = document.getElementById('confirmPassword').value;
 
             if (password !== confirmPassword) {
-                alert('Password and Confirm Password do not match');
+                alert('Les mots de passes sont differents');
             } else {
                 var data = {
-                    email: email,
-                    password: password,
+                    username: username,
+                    mot_de_passe: mot_de_passe,
                     role: role
                 };
 
-                fetch('/api/login', {
+                fetch('api/v1/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -499,9 +475,9 @@
                     })
                     .then(function(responseData) {
                         if (role === 'admin') {
-                            window.location.href = '/dashboard';
+                            window.location.href = '/dashboard.html';
                         } else if (role === 'editor') {
-                            window.location.href = '/page';
+                            window.location.href = '/index.html';
                         } else {}
                     })
                     .catch(function(error) {
@@ -512,14 +488,7 @@
 
 
 
-
-        var currentPage = 1;
-        var cardsPerPage = 12;
-        var line = 0;
-        var data;
-        var selectedCategories = [];
-
-        fetch('/produitpharma')
+        fetch('api/v1/produit')
             .then(function(response) {
                 if (response.ok) {
                     return response.json();
@@ -528,7 +497,7 @@
                 }
             })
             .then(function(responseData) {
-                data = responseData;
+                data = responseData['data'];
                 displayData(currentPage);
                 createPagination();
             })
@@ -536,7 +505,34 @@
                 console.error(error);
             });
 
-        fetch('/medicaments')
+        document.getElementById('rechercheProduit').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la soumission du formulaire par défaut
+
+            var myParam = document.getElementById('nomprod').value.toUpperCase(); // Récupère la valeur du paramètre de chaîne
+            console.log(myParam);
+            // Effectue la requête Fetch
+            fetch('api/v1/produit?pattern=' + encodeURIComponent(myParam))
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json(); // Renvoie les données de la réponse sous forme de JSON
+                    } else {
+                        throw new Error('Erreur lors de la requête.');
+                    }
+                })
+                .then(function(responseData) {
+                    data = responseData['data'];
+                    // Traitement des données de réponse
+                    console.log(data); // Affiche les données dans la console
+                    displayData(currentPage);
+                    createPagination();
+                })
+                .catch(function(error) {
+                    // Gestion des erreurs
+                    console.error(error);
+                });
+        });
+
+        fetch('api/v1/medicament')
             .then(function(response) {
                 if (response.ok) {
                     return response.json();
@@ -545,12 +541,42 @@
                 }
             })
             .then(function(responseData) {
-                toutcategories = responseData;
+                toutcategories = responseData['data'];
                 showCategories();
             })
             .catch(function(error) {
                 console.error(error);
             });
+
+        // filter by the selector
+
+        const selectElement = document.getElementById('subject');
+        selectElement.addEventListener('change', filterSelect);
+
+        function filterSelect() {
+            const selectedCategories = [selectElement.value];
+            console.log(selectedCategories);
+            document.getElementById('selectOption').textContent = selectedCategories;
+
+            // Make API request to the server with the selected categories
+            const url = `/api/v1/produit?pattern=${encodeURIComponent(selectedCategories)}`;
+            console.log(url);
+            fetch(url)
+                .then(response => response.json())
+                .then(responseData => {
+                    //console.log(responseData['data']); // Example: Log the filtered data to the console
+                    data = responseData['data'];
+                    //nomtable = responseData['nomTable'];
+                    // Traitement des données de réponse
+                    console.log(data); // Affiche les données dans la console
+                    displayData(currentPage);
+                    createPagination();
+                })
+                .catch(error => {
+                    console.error('Error retrieving filtered produit data:', error);
+                    // Handle error and show error message to the user
+                });
+        }
 
 
 
@@ -566,7 +592,8 @@
                 var elts = document.createElement('input');
                 elts.className = 'form_1';
                 elts.setAttribute('type', 'checkbox');
-                elts.setAttribute('data-category', categorie);
+                elts.setAttribute('data-category', categorie.toLowerCase() + 'Checkbox')
+                elts.setAttribute('id', categorie.toLowerCase() + 'Checkbox');
                 elts.addEventListener('change', function(event) {
                     var category = event.target.getAttribute('data-category');
                     if (event.target.checked) {
@@ -580,8 +607,8 @@
                     applyFilters();
                 });
 
-                var eltslink = document.createElement('a');
-                eltslink.setAttribute('href', 'detail.html');
+                var eltslink = document.createElement('label');
+                eltslink.setAttribute('for', categorie.toLowerCase() + 'Checkbox');
                 eltslink.textContent = categorie;
 
                 var spaninfo = document.createElement('span');
@@ -596,6 +623,7 @@
                 catContainer.appendChild(eltcontainer);
             });
         }
+
 
         function applyFilters() {
             var filteredData = data;
@@ -614,16 +642,20 @@
         }
 
 
+        var currentPage = 1;
+        var cardsPerPage = 12;
+        var line = 0;
+        var data;
+        var selectedCategories = [];
 
         function displayData(page) {
             var startIndex = (page - 1) * cardsPerPage;
             var endIndex = page * cardsPerPage;
             var infopage = document.getElementById('page-display');
-            infopage.textContent = 'Affichage des infos de ' + startIndex + ' a ' + endIndex;
             var resultContainer = document.getElementById('result');
             resultContainer.innerHTML = '';
 
-            var filteredData = applyFilters();
+            //var filteredData = applyFilters();
 
             data.slice(startIndex, endIndex).forEach(function(item) {
                 var id = item.id;
@@ -637,7 +669,7 @@
 
                 // Creation des cartes
                 var cardby = document.createElement('div');
-                cardby.className = 'shop_1r1 clearfix';
+                cardby.className = 'row';
 
                 var cardColumn = document.createElement('div');
                 cardColumn.className = 'col-sm-3 space_left';
@@ -647,9 +679,12 @@
 
 
                 var imgcontent = document.createElement('img');
-                imgcontent.className = 'img img-responsive card-img';
+                imgcontent.className = 'img img-responsive img-thumbnail card-img';
                 path = 'produits/' + image.substring(27).replace('_', "'");
+                var imgref = document.createElement('a');
                 imgcontent.setAttribute('src', path);
+                imgref.setAttribute('href', 'detail.html/' + id);
+                imgref.appendChild(imgcontent);
                 var card = document.createElement('div');
                 card.className = 'card mtop10';
 
@@ -664,7 +699,7 @@
                 formeField.className = 'text-info';
                 formeField.textContent = forme;
 
-                modeleField = document.createElement('h4');
+                modeleField = document.createElement('h6');
                 modeleField.className = 'bold text-info';
                 modeleField.textContent = modele;
 
@@ -672,16 +707,25 @@
                 condField.className = 'bold text-danger';
                 condField.textContent = conditionnement;
 
+
                 priceField = document.createElement('h4');
                 priceField.className = 'bold text-success';
                 priceField.textContent = prix + ' CFA';
 
                 panierField = document.createElement('h5');
-                linkpanierField = document.createElement('a');
-                linkpanierField.className = "button_1";
-                linkpanierField.setAttribute('href', 'detail.html/' + id);
-                linkpanierField.textContent = 'Voir Detail';
-                panierField.appendChild(linkpanierField);
+                var voirDetailBtn = document.createElement('button');
+                voirDetailBtn.className = 'btn button_1';
+                voirDetailBtn.textContent = 'Voir Detail';
+                voirDetailBtn.addEventListener('click', function() {
+                    // Get the value to send (e.g., item.id)
+                    var valueToSend = item.id;
+
+                    // Construct the URL with the value as a query parameter
+                    var detailPageUrl = 'detail.html?id=' + valueToSend;
+
+                    // Navigate to the detail.html page with the value as a query parameter
+                    window.location.href = detailPageUrl;
+                });
 
                 cardBody.appendChild(imgcontent);
 
@@ -695,6 +739,7 @@
                 card.appendChild(cardFooter);
                 cardcontent.appendChild(card);
                 cardColumn.appendChild(cardcontent);
+                cardFooter.appendChild(voirDetailBtn);
                 if (line === 4) {
                     console.log('ligne :' + line);
                     cardby.appendChild(cardColumn);
@@ -728,7 +773,7 @@
                         endPage = totalPages;
                     }
                 } else {
-                    endPage = maxPageButtons;
+                    //http: //localhost:8009/api/v1/produit/?pattern=BETA
                 }
             }
 

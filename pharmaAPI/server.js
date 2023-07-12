@@ -1,12 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const path = require('path');
+const bodyParser = require('body-parser');
+
 
 const app = express();
 const port = 8009; // Changement du port
 
-
+app.use(bodyParser.json());
 // Demarrer a partir du repertoire "public"
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
 
 // creation de la connexion a postgres
 const pool = new Pool({
-    user: 'defaultuser2',
+    user: 'musajoof',
     host: 'localhost',
     database: 'sunuapi',
     password: 'root123'
@@ -37,93 +38,40 @@ const pool = new Pool({
         // }
 });
 
-// Login route
-app.post('/api/login', (req, res) => {
-    const { email, password, role } = req.body;
-    // Example query to validate the email and password and retrieve user role
-    pool.query('SELECT * FROM utilisateur WHERE email = $1 AND mot_de_passe = $2', [email, password], (error, results) => {
+// Connection Utilisateur
+app.post('/api/v1/login', (req, res) => {
+    const { username, password } = req.body;
+    pool.query('SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2', [username, password], (error, results) => {
         if (error) {
             console.error('Error executing SQL query:', error);
             res.status(500).json({ error: 'An error occurred during login' });
         } else {
             if (results.rows.length === 0) {
-                // Invalid credentials
-                res.status(401).json({ error: 'Invalid email or password' });
+                res.status(401).json({ error: 'Invalid username or password' });
             } else {
-                // Valid credentials
                 const user = results.rows[0];
                 const userId = user.id;
                 const userName = user.nom;
                 const isAdmin = user.est_admin;
                 const isEditor = user.est_editeur;
 
-                // Handle different roles
                 if (isAdmin) {
-                    // Redirect to the admin dashboard
+                    // Redirection => admin dashboard
                     res.redirect('/dashboard.html');
                 } else if (isEditor) {
-                    // Redirect to the editor template
-                    res.render('editor-template', { userId, userName });
+                    // Redirection => editor template
+                    res.render('/index.html', { userId, userName });
                 } else {
-                    // Redirect to the visitor template
-                    res.render('visitor-template', { userId, userName });
+                    // Redirection => visitor template
+                    res.render('/index.html', { userId, userName });
                 }
             }
         }
     });
 });
 
-
-//  Voir tout
-
-app.get('/medicaments', (req, res) => {
-    // Recuperer tout les donnees de la table "medicament"
-    pool.query('SELECT * FROM medicament', (error, results) => {
-        if (error) {
-            console.error('Error retrieving data:', error);
-            res.status(500).json({ error: 'Erreur lors de la recherche de medicaments.' });
-        } else {
-            const data = results.rows.map(row => {
-                const { id, categorie } = row;
-                return { id, categorie };
-            });
-            res.json(data);
-        }
-    });
-});
-
-
-// recuperer tout les  medicaments
-app.get('/produitpharma', (req, res) => {
-    // Executer la requete SQL pour recuperer tout les lignes de la table "medicament"
-    pool.query('SELECT * FROM produit', (error, results) => {
-        if (error) {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche .' });
-        } else {
-            const data = results.rows.map(row => {
-                const { id, code, modele, image, prix, conditionnement, forme, specialites } = row;
-                return { id, code, modele, image, prix, conditionnement, forme, specialites };
-            });
-            res.json(data);
-        }
-    });
-});
-
-// recuperer tout les  medicaments de la base de donnees globales
-app.get('/basemedoc', (req, res) => {
-    pool.query('SELECT * FROM drugbase', (error, results) => {
-        if (error) {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche medicaments.' });
-        } else {
-            res.json(results.rows);
-        }
-    });
-});
-
 // recuperer tout les  formes de medicaments
-app.get('/formeproduitpharma', (req, res) => {
+app.get('/api/v1/formeproduitpharma', (req, res) => {
     pool.query('SELECT forme FROM produit GROUP BY forme ORDER BY forme', (error, results) => {
         if (error) {
             console.error('Erreur a la recuperation:', error);
@@ -136,205 +84,389 @@ app.get('/formeproduitpharma', (req, res) => {
 
 
 
-// recuperer tout les  utilisateurs
-app.get('/utilisateur', (req, res) => {
-    pool.query('SELECT * FROM utilisateur', (error, results) => {
-        if (error) {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche medicaments.' });
+app.get('/api/v1/produitbypattern', (req, res) => {
+    const myParam = req.query.param;
+
+    pool.query('SELECT * FROM produit WHERE modele LIKE $1', [`%${myParam}%`])
+        .then(result => {
+            const data = result.rows;
+            res.json(data);
+        })
+        .catch(error => {
+            console.error('Error during retrieval:', error);
+            res.status(500).json({ error: 'An error occurred during the search.' });
+        });
+});
+
+app.get('/api/v1/produitFilterSelect', (req, res) => {
+    const selectedCategories = req.query.categories; // Get the selected categories from the query parameters
+
+    let query = 'SELECT * FROM produit';
+    let queryParams = [];
+
+    // Check if categories are provided and build the WHERE clause for filtering
+    if (selectedCategories && selectedCategories.length > 0) {
+        const placeholders = selectedCategories.map((_, index) => `$${index + 1}`).join(',');
+        query += ` WHERE forme=${placeholders})`;
+        queryParams = selectedCategories;
+    }
+
+    pool.query(query, queryParams)
+        .then(result => {
+            const data = result.rows;
+            res.json(data);
+        })
+        .catch(error => {
+            console.error('Error retrieving produit data:', error);
+            res.status(500).json({ error: 'An error occurred during the search.' });
+        });
+});
+
+
+app.get('/api/v1/produitlink', (req, res) => {
+    const selectedCategories = req.query.categories; // Get the selected categories from the query parameters
+
+    let query = 'SELECT * FROM produit';
+    let queryParams = [];
+    // SELECT * FROM produit WHERE refid=(SELECT idtypemed FROM medicament WHERE categorie LIKE '%ORL%')
+    // Check if categories are provided and build the WHERE clause for filtering
+    if (selectedCategories && selectedCategories.length > 0) {
+        const placeholders = selectedCategories.map((_, index) => `$${index + 1}`).join(',');
+        query += ` WHERE refid=(SELECT idtypemed FROM medicament) WHERE categorie IN (${placeholders})`;
+        queryParams = selectedCategories;
+    }
+
+    pool.query(query, queryParams)
+        .then(result => {
+            const data = result.rows;
+            res.json(data);
+        })
+        .catch(error => {
+            console.error('Error retrieving produit data:', error);
+            res.status(500).json({ error: 'An error occurred during the search.' });
+        });
+});
+
+app.get('/api/produitbyid/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+
+        // Query the PostgreSQL database for the produit with the given ID
+        const client = await pool.connect();
+        const query = 'SELECT * FROM produit WHERE id = $1';
+        const result = await client.query(query, [id]);
+        client.release();
+
+        // Retrieve the row from the result object
+        const row = result.rows[0];
+
+        // Send the produit data as a JSON response
+        res.json(row);
+    } catch (error) {
+        // Handle any errors that occur during the request
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+// app.post('/api/v1/detailproduit', (req, res) => {
+//     const value = req.body.value;
+//     let query = 'SELECT * FROM produit WHERE id=$1',[`${value}`];
+//     // Process the value or perform any desired actions
+//     // For example, you can send the value to another page
+
+//     // Send a response back to the client
+//     res.json({ message: 'Value received successfully' });
+// });
+
+
+
+
+
+// app.get('/api/detailproduit', async(req, res) => {
+//     try {
+//         // Query the PostgreSQL database for all data in the produit table
+//         const client = await pool.connect();
+//         const query = 'SELECT * FROM produit';
+//         const result = await client.query(query);
+//         client.release();
+
+//         // Retrieve the rows from the result object
+//         const rows = result.rows;
+
+//         // Create an array to store the data as objects
+//         const data = rows.map(row => ({
+//             id: row.id,
+//             code: row.code,
+//             modele: row.modele,
+//             prix: row.prix,
+//             conditionnement: row.conditionnement
+//         }));
+
+//         // Redirect the client to the detail.html page with the data as query parameters
+//         const queryParameters = new URLSearchParams({ data: JSON.stringify(data) });
+//         res.redirect(`/detail.html?${queryParameters}`);
+//     } catch (error) {
+//         // Handle any errors that occur during the request
+//         console.error(error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
+
+
+app.route('/api/v1/:table')
+    // GET request for retrieving all records from a table or pattern search
+    .get((req, res) => {
+        const table = req.params.table;
+        const pattern = req.query.pattern; // Pattern for search
+
+        let query = '';
+        let nomTable = '';
+
+        if (table === 'utilisateur') {
+            query = 'SELECT * FROM utilisateur';
+            nomTable = 'utilisateur';
+        } else if (table === 'maladie') {
+            query = 'SELECT * FROM maladie';
+            nomTable = 'maladie';
+        } else if (table === 'drugbase') {
+            query = 'SELECT * FROM drugbase';
+            nomTable = 'drugbase';
+        } else if (table === 'medicament') {
+            query = 'SELECT * FROM medicament';
+            nomTable = 'medicament';
+        } else if (table === 'produit') {
+            query = 'SELECT * FROM produit';
+            nomTable = 'produit';
         } else {
-            res.json(results.rows);
+            return res.status(404).json({ error: 'Table not found.' });
         }
-    });
-});
 
+        // Add pattern search if provided
+        if (pattern) {
+            if (nomTable === 'utilisateur') {
+                query += ` WHERE username LIKE '%${pattern}%' OR mot_de_passe LIKE '%${pattern}%'`;
+            } else if (nomTable === 'maladie') {
+                query += ` WHERE UPPER(prescript) LIKE '%${pattern}%' OR UPPER(nom) LIKE '%${pattern}%' `;
+            } else if (nomTable === 'drugbase') {
+                query += ` WHERE UPPER(nom_generique) LIKE '%${pattern}%' OR UPPER(nom_standard) LIKE '%${pattern}%'`;
+            } else if (nomTable === 'medicament') {
+                query += ` WHERE nom_generique LIKE '%${pattern}%' OR nom_standard LIKE '%${pattern}%'`;
+            } else if (nomTable === 'produit') {
+                query += ` WHERE forme LIKE '%${pattern}%' OR modele LIKE '%${pattern}%'`;
+            }
+        }
 
-// recuperer tout les  medicaments de la base de donnees globales
-app.get('/maladies', (req, res) => {
-    pool.query('SELECT * FROM maladie', (error, results) => {
-        if (error) {
-            console.error('Erreur a la recuperations:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche .' });
+        pool.query(query, (error, results) => {
+            if (error) {
+                console.error('Error retrieving data:', error);
+                res.status(500).json({ error: 'An error occurred during the search.' });
+            } else {
+                const data = results.rows;
+                res.json({ nomTable, data });
+            }
+            //return res.redirect('/index.html');
+
+        });
+    })
+    .post((req, res) => {
+        const table = req.params.table;
+        const data = req.body;
+
+        let query = '';
+        let nomTable = '';
+
+        if (table === 'utilisateur') {
+            const { username, mot_de_passe, est_admin, est_editeur } = data;
+            query = 'INSERT INTO utilisateur (username, mot_de_passe, est_admin, est_editeur) VALUES ($1, $2, $3, $4)';
+            nomTable = 'utilisateur';
+            const values = [username, mot_de_passe, est_admin, est_editeur];
+            pool.query(query, values)
+                .then(() => {
+                    res.status(201).json({ message: `${nomTable} created successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error creating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
+                });
+        } else if (table === 'maladie') {
+            const { prescript, nom, description, vote, recommandation } = data;
+            query = 'INSERT INTO maladie (prescript, nom, description, vote, recommandation) VALUES ($1, $2, $3, $4, $5)';
+            nomTable = 'maladie';
+            const values = [prescript, nom, description, vote, recommandation];
+            pool.query(query, values)
+                .then(() => {
+                    res.status(201).json({ message: `${nomTable} created successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error creating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
+                });
+        } else if (table === 'drugbase') {
+            const { id, nom_generique, nom_standard, force, expiration, entreprise, dateproduct, idservice } = data;
+            query = 'INSERT INTO drugbase (id, nom_generique, nom_standard, force, expiration, entreprise, dateproduct, idservice) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+            nomTable = 'drugbase';
+            const values = [id, nom_generique, nom_standard, force, expiration, entreprise, dateproduct, idservice];
+            pool.query(query, values)
+                .then(() => {
+                    res.status(201).json({ message: `${nomTable} created successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error creating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
+                });
+        } else if (table === 'medicament') {
+            const { nom_generique, nom_standard, force, expiration, entreprise, date_production } = data;
+            query = 'INSERT INTO medicament (nom_generique, nom_standard, force, expiration, entreprise, date_production) VALUES ($1, $2, $3, $4, $5, $6)';
+            nomTable = 'medicament';
+            const values = [nom_generique, nom_standard, force, expiration, entreprise, date_production];
+            pool.query(query, values)
+                .then(() => {
+                    res.status(201).json({ message: `${nomTable} created successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error creating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
+                });
+        } else if (table === 'produit') {
+            const { id, code, modele, image, prix, conditionnement, forme, specialites, refid } = data;
+            query = 'INSERT INTO produit (id, code, modele, image, prix, conditionnement, forme, specialites, refid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
+            nomTable = 'produit';
+            const values = [id, code, modele, image, prix, conditionnement, forme, specialites, refid];
+            pool.query(query, values)
+                .then(() => {
+                    res.status(201).json({ message: `${nomTable} created successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error creating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
+                });
         } else {
-            res.json(results.rows);
+            return res.status(404).json({ error: 'Table not found.' });
         }
+    })
+    .put((req, res) => {
+        const table = req.params.table;
+        const id = req.query.id;
+        const data = req.body;
+
+        let query = '';
+        let nomTable = '';
+
+        if (table === 'utilisateur') {
+            const { username, mot_de_passe, est_admin, est_editeur } = data;
+            query = 'UPDATE utilisateur SET username = $1, mot_de_passe = $2, est_admin = $3, est_editeur = $4 WHERE id = $5';
+            nomTable = 'utilisateur';
+            const values = [username, mot_de_passe, est_admin, est_editeur, id];
+            pool.query(query, values)
+                .then(() => {
+                    res.json({ message: `${nomTable} with ID ${id} updated successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error updating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
+                });
+        } else if (table === 'maladie') {
+            const { prescript, nom, description, vote, recommandation } = data;
+            query = 'UPDATE maladie SET prescript = $1, nom = $2, description = $3, vote = $4, recommandation = $5 WHERE id = $6';
+            nomTable = 'maladie';
+            const values = [prescript, nom, description, vote, recommandation, id];
+            pool.query(query, values)
+                .then(() => {
+                    res.json({ message: `${nomTable} with ID ${id} updated successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error updating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
+                });
+        } else if (table === 'drugbase') {
+            const { id, nom_generique, nom_standard, force, expiration, entreprise, dateproduct, idservice } = data;
+            query = 'UPDATE drugbase SET nom_generique = $1, nom_standard = $2, force = $3, expiration = $4, entreprise = $5, dateproduct = $6, idservice = $7 WHERE id = $8';
+            nomTable = 'drugbase';
+            const values = [nom_generique, nom_standard, force, expiration, entreprise, dateproduct, idservice, id];
+            pool.query(query, values)
+                .then(() => {
+                    res.json({ message: `${nomTable} with ID ${id} updated successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error updating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
+                });
+        } else if (table === 'medicament') {
+            const { nom_generique, nom_standard, force, expiration, entreprise, date_production } = data;
+            query = 'UPDATE medicament SET nom_generique = $1, nom_standard = $2, force = $3, expiration = $4, entreprise = $5, date_production = $6 WHERE id = $7';
+            nomTable = 'medicament';
+            const values = [nom_generique, nom_standard, force, expiration, entreprise, date_production, id];
+            pool.query(query, values)
+                .then(() => {
+                    res.json({ message: `${nomTable} with ID ${id} updated successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error updating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
+                });
+        } else if (table === 'produit') {
+            const { id, code, modele, image, prix, conditionnement, forme, specialites, refid } = data;
+            query = 'UPDATE produit SET code = $1, modele = $2, image = $3, prix = $4, conditionnement = $5, forme = $6, specialites = $7, refid = $8 WHERE id = $9';
+            nomTable = 'produit';
+            const values = [code, modele, image, prix, conditionnement, forme, specialites, refid, id];
+            pool.query(query, values)
+                .then(() => {
+                    res.json({ message: `${nomTable} with ID ${id} updated successfully.` });
+                })
+                .catch(error => {
+                    console.error(`Error updating ${nomTable}:`, error);
+                    res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
+                });
+        } else {
+            return res.status(404).json({ error: 'Table not found.' });
+        }
+    })
+    .delete((req, res) => {
+        const table = req.params.table;
+        const id = req.query.id;
+
+        let query = '';
+        let nomTable = '';
+
+        if (table === 'utilisateur') {
+            query = 'DELETE FROM utilisateur WHERE id = $1';
+            nomTable = 'utilisateur';
+        } else if (table === 'maladie') {
+            query = 'DELETE FROM maladie WHERE id = $1';
+            nomTable = 'maladie';
+        } else if (table === 'drugbase') {
+            query = 'DELETE FROM drugbase WHERE id = $1';
+            nomTable = 'drugbase';
+        } else if (table === 'medicament') {
+            query = 'DELETE FROM medicament WHERE id = $1';
+            nomTable = 'medicament';
+        } else if (table === 'produit') {
+            query = 'DELETE FROM produit WHERE id = $1';
+            nomTable = 'produit';
+        } else {
+            return res.status(404).json({ error: 'Table not found.' });
+        }
+
+        pool.query(query, [id])
+            .then(() => {
+                res.json({ message: `${nomTable} with ID ${id} deleted successfully.` });
+            })
+            .catch(error => {
+                console.error(`Error deleting ${nomTable}:`, error);
+                res.status(500).json({ error: `An error occurred while deleting the ${nomTable}.` });
+            });
     });
-});
-
-
-//**********************************  BY ID *********************************/
-
-// recuperer tout les utilisateurs par ID
-app.get('/utilisateur/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('SELECT * FROM utilisateur WHERE id = $1', [id])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche.' });
-        });
-});
-
-// recuperer tout les medicament par ID
-app.get('/medicaments/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('SELECT * FROM medicament WHERE id = $1', [id])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche the medicament.' });
-        });
-});
-
-// recuperer tout les produit par ID
-app.get('/produitpharma/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('SELECT * FROM produit WHERE id = $1', [id])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche the medicament.' });
-        });
-});
-
-// recuperer tout les medicaments de la base de donnees centrales par ID
-app.get('/basemedoc/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('SELECT * FROM drugbase WHERE id = $1', [id])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche ' });
-        });
-});
-
-app.get('/maladies/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('SELECT * FROM maladie WHERE id = $1', [id])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche.' });
-        });
-});
-
-//**********************************  BY NAME *********************************/
-
-// recuperer tout les produit par ID
-app.get('api/produitpharma/:nom', (req, res) => {
-    const nomprod = req.params.nomprod;
-
-    pool.query('SELECT * FROM produit WHERE modele = "$1"', [nomprod])
-        .then(result => {
-            const data = result.rows[0]; // Recuperer la premiere ligne
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Erreur a la recuperation:', error);
-            res.status(500).json({ error: 'Une erreur est apparue a la recherche the medicament.' });
-        });
-});
-
-
-// Ajouter utilisateur
-app.post('/utilisateur', (req, res) => {
-    const { email, username, password } = req.body;
-
-    pool.query(
-            'INSERT INTO utilisateur (email, username, mot_de_passe) VALUES ($1, $2, $3)', [email, username, password]
-        )
-        .then(() => {
-            res.status(201).json({ message: 'Utilisateur cree avec succes.' });
-        })
-        .catch(error => {
-            console.error('Erreur lors de l enregistrement de l utilisateur:', error);
-            res.status(500).json({ error: 'Erreur lors de l enregistrement de l utilisateur.' });
-        });
-});
-
-
-
-// Creer un medicament
-app.post('/medicaments', (req, res) => {
-    const { nom_generique, nom_standard, force, expiration, entreprise, date_production } = req.body;
-
-    pool.query(
-            'INSERT INTO medicament (nom_generique, nom_standard, force, expiration, entreprise, date_production) VALUES ($1, $2, $3, $4, $5, $6)', [nom_generique, nom_standard, force, expiration, entreprise, date_production]
-        )
-        .then(() => {
-            res.status(201).json({ message: 'Medicament created successfully.' });
-        })
-        .catch(error => {
-            console.error('Error creating medicament:', error);
-            res.status(500).json({ error: 'An error occurred while creating the medicament.' });
-        });
-});
-
-// Mis a jour des medicaments
-app.put('/medicaments/:id', (req, res) => {
-    const id = req.params.id;
-    const { nom_generique, nom_standard, force, expiration, entreprise, date_production } = req.body;
-
-    pool.query(
-            'UPDATE medicament SET nom_generique = $1, nom_standard = $2, force = $3, expiration = $4, entreprise = $5, date_production = $6 WHERE id = $7', [nom_generique, nom_standard, force, expiration, entreprise, date_production, id]
-        )
-        .then(() => {
-            res.json({ message: `Medicament with ID ${id} updated successfully.` });
-        })
-        .catch(error => {
-            console.error('Error updating medicament:', error);
-            res.status(500).json({ error: 'An error occurred while updating the medicament.' });
-        });
-});
-
-// Effacer un  medicament
-app.delete('/medicaments/:id', (req, res) => {
-    const id = req.params.id;
-
-    pool.query('DELETE FROM medicament WHERE id = $1', [id])
-        .then(() => {
-            res.json({ message: `Medicament avec l 'identifiant ${id} effacer avec success.` });
-        })
-        .catch(error => {
-            console.error('Error deleting medicament:', error);
-            res.status(500).json({ error: 'An error occurred while deleting the medicament.' });
-        });
-});
-
-// Effacer tout les  medicaments
-app.delete('/medicaments', (req, res) => {
-    pool.query('DELETE FROM medicament')
-        .then(() => {
-            res.json({ message: 'Tout les medicaments effaces avec succes.' });
-        })
-        .catch(error => {
-            console.error('Error deleting medicaments:', error);
-            res.status(500).json({ error: 'An error occurred while deleting the medicaments.' });
-        });
-});
-
-
 // Demarrage du serveur
 app.listen(port, () => {
     console.log(`Acceder au serveur http://localhost:${port}`);
+    console.log(`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`);
+    console.log(`POST   => Ajouter utilisateur     http://localhost:${port}/api/v2/utilisateur`);
+    console.log(`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`);
+    console.log(`GET    => Recuperer tout les medicaments http://localhost:${port}/api/v1/medicaments`);
+    console.log(`POST   => Ajout de medicaments http://localhost:${port}/api/v2/medicaments`);
+    console.log(`UPDATE => MIS A JOUR des medicaments  http://localhost:${port}/api/v3/medicaments`);
+    console.log(`DELETE => Effacer les medicaments  http://localhost:${port}/api/v4/medicaments`);
+
 });

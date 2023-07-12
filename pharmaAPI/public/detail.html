@@ -79,24 +79,24 @@
         <section id="header" class="cd-secondary-nav">
             <nav class="navbar">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header page-scroll">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <a class="navbar-brand" href="index.html"><span class="bold greenyel" >BI<i class="fa fa-globe text-success greenyel"></i></span>DATA</a>
                     </div>
 
+                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="m_tag active_tab" href="index.html">Acceuil</a></li>
                             <li><a class="m_tag" href="pharma.html">Pharmacie</a></li>
                             <li><a class="m_tag" href="meteo.html">Meteo</a></li>
                             <li><a class="m_tag" href="insecte.html">Insecte</a></li>
-                            <li><a class="m_tag" href="gallery.html">Gallery</a></li>
+                            <li><a class="m_tag" href="gallery.html">Galerie</a></li>
                             <li><a class="m_tag" href="contact.html">Contact</a></li>
                             <li class="dropdown dropdown-large">
                                 <a href="#" class="dropdown-toggle m_tag" data-toggle="dropdown">Qui sommes nous ?<b class="caret"></b></a>
@@ -107,7 +107,7 @@
                                             <li>
                                                 <a href="#"><img src="img/4.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Sed Augue</span></a></li>
+                                            <li><a href="#"> TEAM <br> <span class="bold">SALIMATA YAYA BA</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -117,7 +117,7 @@
                                             <li>
                                                 <a href="#"><img src="img/5.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Nibh Elementum</span></a></li>
+                                            <li><a href="#"> TEAM  <br> <span class="bold">FATOU THIAM</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -128,7 +128,7 @@
                                             <li>
                                                 <a href="#"><img src="img/7.jpg" class="iw" alt="abc"></a>
                                             </li>
-                                            <li><a href="#"> CONSULTING DOCTOR <br> <span class="bold">Dr. Ante Dapibus</span></a></li>
+                                            <li><a href="#"> TEAM  <br> <span class="bold">MOUSSA DIOUF</span></a></li>
                                             <li><a href="#"><i class="fa fa-mobile"></i> 1234567890</a></li>
                                             <li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
                                         </ul>
@@ -145,28 +145,26 @@
                             </div>
                         </ul>
                     </div>
-                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.container-fluid -->
             </nav>
         </section>
     </div>
-
+    <br><br>
     <section id="detail">
         <div class="container">
             <div class="row">
                 <div class="detail_1 clearfix">
                     <div class="col-sm-4">
-                        <div class="detail_1l clearfix">
-                            <img src="img/34.jpg" class="iw" alt="abc">
+                        <div class="detail_1l clearfix" id="imgproduct">
+                            <!-- <img src="img/34.jpg" class="iw" alt="abc"> -->
                         </div>
+                        <span id="genericname"></span>
                     </div>
                     <div class="col-sm-8">
                         <div class="detail_1r clearfix">
-                            <h1 class="mgt">£80.00</h1>
-                            <p>So if you are interested in purchasing our wonderful medical equipment you can address our superb 24/7 online support system. We are always ready to help you. Remember that our store often provides many different promos and
-                                you can get a good discount.</p>
-                            <h3>Adventure Medical Kits World Travel Kit</h3>
+                            <h1 class="mgt" id="priceproduct"></h1>
+                            <p>Recommandation : <span id="recommandation"></span>.</p>
+                            <h3 id="nameproduct"></h3>
                             <div class="input-group number-spinner">
                                 <span class="input-group-btn">
 					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
@@ -176,53 +174,32 @@
 					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
                             </div>
-                            <h5><a class="button_1" href="#">ADD TO CART</a></h5>
-                            <h6>Category: <a href="#">Bags</a></h6>
-                            <h6>Tag: <a href="#">Medical kit</a></h6>
+                            <h5><a class="button_1" href="#">ACHETER</a></h5>
+                            <h6>Conditionnement :
+                                <a href="#" id="condproduct"></a>
+                            </h6>
+                            <h6>Forme :
+                                <a href="#" id="formeproduct"></a>
+                            </h6>
                         </div>
                     </div>
                 </div>
                 <div class="center_detail_2 clearfix">
                     <div class="center_detail_2_right_inner_2 clearfix">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home_description">Explanation</a></li>
-                            <li class=""><a data-toggle="tab" href="#menu_information">More information</a></li>
-                            <li class=""><a data-toggle="tab" href="#menu_review">Comments (1)</a></li>
+                            <li class="active"><a data-toggle="tab" href="#home_description">A Propos</a></li>
+                            <li class=""><a data-toggle="tab" href="#menu_information">Plus informations</a></li>
+                            <li class=""><a data-toggle="tab" href="#menu_review">Commentaires (1)</a></li>
                         </ul>
 
                         <div class="tab-content clearfix">
                             <div id="home_description" class="tab-pane fade clearfix active in">
                                 <div class="click clearfix">
                                     <div class="click_inner clearfix">
-                                        <h4 class="mgt">Lorem Ipsum</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.Praesent mauris.
-                                            Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitursodales ligula in
-                                            libero.Sed dignissim lacinia nunc.</p>
+                                        <h4 class="mgt">Description</h4>
+                                        <p id="prodDesc"></p>
                                     </div>
-                                    <div class="click_inner clearfix">
-                                        <h4>Adipiscing Elit</h4>
-                                        <ul>
-                                            <li>Sed cursus ante dapibus diam Sed nisi. </li>
-                                            <li>Nulla quis sem at nibh elementum imperdiet.</li>
-                                            <li>Duis sagittis ipsum Praesent mauris.</li>
-                                            <li>Fusce nec tellus sed augue semper porta.</li>
-                                            <li>Mauris massa Vestibulum lacinia arcu eget nulla.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="click_inner clearfix">
-                                        <h4>Integer Nec </h4>
-                                        <ul>
-                                            <li>Sed cursus ante dapibus diam Sed nisi. </li>
-                                            <li>Nulla quis sem at nibh elementum imperdiet.</li>
-                                            <li>Duis sagittis ipsum Praesent mauris.</li>
-                                            <li>Fusce nec tellus sed augue semper porta.</li>
-                                            <li>Mauris massa Vestibulum lacinia arcu eget nulla.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="click_inner clearfix">
-                                        <p>Praesent libero Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia
-                                            arcu eget nulla.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitursodales ligula in libero.Sed dignissim lacinia nunc.</p>
-                                    </div>
+
                                 </div>
                             </div>
                             <div id="menu_information" class="tab-pane fade clearfix">
@@ -230,48 +207,60 @@
                                     <div class="click_inner_1  clearfix">
                                         <div class="col-sm-2">
                                             <div class="click_inner_1_left clearfix">
-                                                <h4>Brand</h4>
+                                                <h4>Nom </h4>
                                             </div>
                                         </div>
                                         <div class="col-sm-10">
                                             <div class="click_inner_1_right clearfix">
-                                                <h5>Vestibulum Lacinia</h5>
+                                                <h5 id="standardname"></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="click_inner_1 border_top_none_1 clearfix">
                                         <div class="col-sm-2">
                                             <div class="click_inner_1_left clearfix">
-                                                <h4>Manufacturer</h4>
+                                                <h4>Entreprise </h4>
                                             </div>
                                         </div>
                                         <div class="col-sm-10">
                                             <div class="click_inner_1_right clearfix">
-                                                <h5> America</h5>
+                                                <h5 id="nomentreprise"></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="click_inner_1 border_top_none_1 clearfix">
                                         <div class="col-sm-2">
                                             <div class="click_inner_1_left clearfix">
-                                                <h4>Model-number</h4>
+                                                <h4>force </h4>
                                             </div>
                                         </div>
                                         <div class="col-sm-10">
                                             <div class="click_inner_1_right clearfix">
-                                                <h5>6000 Pro</h5>
+                                                <h5 id="forceproduit"></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="click_inner_1 border_top_none_1 clearfix">
                                         <div class="col-sm-2">
                                             <div class="click_inner_1_left clearfix">
-                                                <h4>Features</h4>
+                                                <h4>Date Production </h4>
                                             </div>
                                         </div>
                                         <div class="col-sm-10">
                                             <div class="click_inner_1_right clearfix">
-                                                <h5> Effectively removes tough plaque between teeth and just below the gum line. Silky-smooth, shred-resistant texture</h5>
+                                                <h5 id="productdate"></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="click_inner_1 border_top_none_1 clearfix">
+                                        <div class="col-sm-2">
+                                            <div class="click_inner_1_left clearfix">
+                                                <h4>Date Expiration </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="click_inner_1_right clearfix">
+                                                <h5 id="expiredate"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -326,16 +315,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="detail_last clearfix">
-                    <h2 class="mgt">Related products</h2>
-                    <div class="shop_1r1 clearfix">
+                <br><br>
+                <!-- <div class="detail_last clearfix">
+                    <h2 class="mgt">Produits lies</h2>
+                    <div class="shop_1r1 clearfix" id="linkedproduct">
                         <div class="col-sm-3 space_left">
                             <div class="shop_1r1i text-center clearfix">
                                 <a href="#"><img src="img/35.jpg" class="iw" alt="abc"></a>
                                 <h6><a href="#">Bags</a></h6>
                                 <h5><a class="col_1" href="#">GoWISE USA Advanced Control Digital Blood...</a></h5>
                                 <h4 class="bold">£105.00</h4>
-                                <h5><a class="button_1" href="#">ADD TO CART</a></h5>
+                                <h5><a class="button_1" href="#">ACHETER</a></h5>
                             </div>
                         </div>
                         <div class="col-sm-3 space_left">
@@ -364,10 +354,10 @@
                                 <h4 class="bold">£65.00</h4>
                                 <h5><a class="button_1" href="#">ADD TO CART</a></h5>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div> -->
             </div>
+        </div>
+        </div>
         </div>
         </div>
     </section>
@@ -481,25 +471,130 @@
             });
 
         });
-    </script>
 
-    <script>
-        $(document).on('click', '.number-spinner button', function() {
-            var btn = $(this),
-                oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-                newVal = 0;
 
-            if (btn.attr('data-dir') == 'up') {
-                newVal = parseInt(oldValue) + 1;
-            } else {
-                if (oldValue > 1) {
-                    newVal = parseInt(oldValue) - 1;
+
+        // Get the produit ID from the URL
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        // Fetch the produit data using the ID
+        fetch(`/api/produitbyid/${id}`)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+
+                // Use the data as needed on the detail.html page
+                console.log('Produit data:', data);
+
+                var imgcontainer = document.getElementById('imgproduct');
+                var imgblock = document.createElement('img');
+                imgblock.src = data['image'];
+                imgblock.className = 'img img-responsive img-polaroid card-img2';
+                imgcontainer.appendChild(imgblock);
+
+                var pricecontainer = document.getElementById('priceproduct');
+                pricecontainer.className = 'bold text-danger';
+                pricecontainer.innerHTML = data['prix'] + '<span> FCFA </span>';
+
+                var namecontainer = document.getElementById('nameproduct');
+                namecontainer.className = 'text-info';
+                namecontainer.innerHTML = data['modele'];
+
+                var condcontainer = document.getElementById('condproduct');
+                condcontainer.className = 'bold text-success';
+                condcontainer.innerHTML = data['conditionnement'];
+
+                var formecontainer = document.getElementById('formeproduct');
+                formecontainer.className = 'bold text-success';
+                formecontainer.innerHTML = data['forme'];
+                if (data['modele'].includes('+')) {
+                    console.log(data['modele'])
+                    var value = data['modele'].split('+')[0];
                 } else {
-                    newVal = 1;
+                    var value = data['modele'].split(' ')[0];
                 }
-            }
-            btn.closest('.number-spinner').find('input').val(newVal);
-        });
+
+                console.log(value);
+                var drug;
+                // Fetch the produit data using the ID
+                fetch(`/api/v1/drugbase/?pattern=${encodeURIComponent(value)}`)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+
+                        // Use the data as needed on the detail.html page
+                        console.log('Produit data:', data['data']);
+                        var linkedprod = document.getElementById('linkedproduct');
+                        for (obj in data['data']) {
+                            drug = data['data'][obj];
+                            console.log(drug);
+                        }
+                        var generic = document.getElementById('genericname');
+                        generic.className = 'bold text-warning';
+                        generic.textContent = drug['nom_generique'];
+
+                        var standardname = document.getElementById('standardname');
+                        standardname.className = 'bold text-info';
+                        standardname.textContent = drug['nom_standard'];
+
+                        var standardname = document.getElementById('standardname');
+                        standardname.className = 'bold text-info';
+                        standardname.textContent = drug['nom_standard'];
+
+                        var nomentreprise = document.getElementById('nomentreprise');
+                        nomentreprise.className = 'bold text-info';
+                        nomentreprise.textContent = drug['entreprise'];
+
+                        var forceprod = document.getElementById('forceproduit');
+                        forceprod.className = 'bold text-info';
+                        forceprod.textContent = drug['force'];
+
+                        var productdate = document.getElementById('productdate');
+                        productdate.className = 'bold text-info';
+                        productdate.textContent = drug['dateproduct'];
+
+                        var expiredate = document.getElementById('expiredate');
+                        expiredate.className = 'bold text-info';
+                        expiredate.textContent = drug['expiration'];
+                        var medval = drug['nom_generique'].toUpperCase().trim();
+                        console.log(medval);
+                        var rcmd = document.getElementById('recommandation');
+                        var prodDesc = document.getElementById('prodDesc');
+                        fetch(`/api/v1/maladie/?pattern=${encodeURIComponent(medval)}`)
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(Responsedata) {
+                                console.log("maladie : ", Responsedata['data']);
+                                for (obj in Responsedata['data']) {
+                                    druginfo = Responsedata['data'][obj];
+                                    console.log(druginfo);
+
+
+                                }
+                                rcmd.className = 'text-warning';
+                                rcmd.textContent = druginfo['nom'];
+                                prodDesc.textContent = druginfo['description'];
+                            })
+                            .catch(function(error) {
+                                console.error(error);
+                            });
+
+                    })
+
+                .catch(function(error) {
+                    console.error(error);
+                });
+
+
+
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
     </script>
 </body>
 
