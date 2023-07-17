@@ -4,6 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 
+
+
 const app = express();
 const port = 8005; // Changement du port
 
@@ -16,7 +18,7 @@ app.get('/', (req, res) => {
     // extraire les parametres de requete
     const query = req.query;
     // Serve the query.html page with the query parameters
-    res.sendFile(path.join(__dirname, 'public', 'index.html'), {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'),{
         query: JSON.stringify(query),
     });
 });
