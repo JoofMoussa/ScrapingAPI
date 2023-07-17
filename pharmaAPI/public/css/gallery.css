@@ -1,0 +1,73 @@
+/*
+Template Name:Clinic
+File: Layout CSS
+Author: Templates On Web
+Author URI: http://templateonweb.com/
+Licence: <a href="http://www.templateonweb.com/terms.php?v=content&contentid=152">Website Template Licence</a>
+*/
+
+
+/*********************gallery****************/
+
+.main_o {
+    background: #333;
+}
+
+#gallery {
+    padding-block-start: 40px;
+    padding-block-end: 40px;
+}
+
+.center_detail_2_right_inner_2 {
+    margin-block-start: 20px;
+}
+
+.center_detail_2_right_inner_2 ul li a {
+    color: #666;
+    background: none;
+}
+
+.center_detail_2_right_inner_2 ul li a:hover {
+    color: #2a93c9;
+    background: none;
+}
+
+.click {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-block-start: none;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    color: #2a93c9;
+    font-weight: bold;
+}
+
+.click_inner {
+    margin-block-start: 15px;
+}
+
+
+/*********************gallery_end****************/
+
+@media screen and (max-inline-size: 767px) {
+    .center_detail_2_right_inner_2 {
+        padding-inline-start: 10px;
+        padding-inline-end: 10px;
+    }
+    .click_inner_i {
+        margin-block-start: 10px;
+    }
+}
+
+@media (min-inline-size:768px) and (max-inline-size:991px) {
+    .nav-tabs>li {
+        font-size: 16px;
+    }
+}
+
+@media (min-inline-size:992px) and (max-inline-size:1200px) {}
+
+@media (min-inline-size:1201px) and (max-inline-size:1280px) {}
