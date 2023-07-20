@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart avec D3.js</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div id="chart-container">
+                    <!-- Le pie chart sera dessiné ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Charger le fichier CSV
+        d3.csv("categories.csv").then(function(data) {
+            // Compter le nombre d'occurrences de chaque forme
+            var formeCounts = {};
+            data.forEach(function(d) {
+                var forme = d.forme;
+                if (formeCounts[forme]) {
+                    formeCounts[forme]++;
+                } else {
+                    formeCounts[forme] = 1;
+                }
+            });
+
+            // Trier les catégories en fonction du nombre d'occurrences (du plus grand au plus petit)
+            var sortedCategories = Object.keys(formeCounts).sort(function(a, b) {
+                return formeCounts[b] - formeCounts[a];
+            });
+
+            // Sélectionner les cinq catégories les plus représentatives
+            var top5Categories = sortedCategories.slice(0, 5);
+
+            // Convertir les données en un tableau d'objets pour D3.js
+            var pieData = [];
+            top5Categories.forEach(function(category) {
+                pieData.push({
+                    label: category,
+                    value: formeCounts[category]
+                });
+            });
+
+            // Créer le Pie Chart
+            var pie = d3.pie()
+                .value(function(d) {
+                    return d.value;
+                });
+
+            var arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(200); // Augmenter le rayon externe pour agrandir le pie chart
+
+            var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var svg = d3.select("#chart-container")
+                .append("svg")
+                .attr("width", 400)
+                .attr("height", 400)
+                .append("g")
+                .attr("transform", "translate(200,200)"); // Centrer le pie chart
+
+            var arcs = svg.selectAll("arc")
+                .data(pie(pieData))
+                .enter()
+                .append("g");
+
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", function(d, i) {
+                    return color(i);
+                });
+
+            arcs.append("text")
+                .attr("transform", function(d) {
+                    return "translate(" + arc.centroid(d) + ")";
+                })
+                .attr("text-anchor", "middle")
+                .text(function(d) {
+                    return d.data.label;
+                });
+        }).catch(function(error) {
+            // En cas d'erreur lors du chargement du fichier CSV
+            console.log("Erreur lors du chargement du fichier CSV:", error);
+        });
+    </script>
+</body>
+
+</html>

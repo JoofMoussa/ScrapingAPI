@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
 </head>
 
 
@@ -242,7 +243,7 @@
                         </div>
                         <div class="text-center shop_1r2 clearfix">
                             <div class="row">
-                                <nav aria-label="Card Pagination">
+                                <nav aria-label="pagination">
                                     <ul id="pagination" class="pagination justify-content-center"></ul>
                                 </nav>
                             </div>
@@ -431,6 +432,16 @@
 
         }
         //Fin Tri par defaut
+        console.log(window.scrollY);
+        window.addEventListener('scroll', function() {
+            if (window.scrollY >= window.scrollMaxY) {
+                page++;
+                getMovies(patternRecherche)
+                window.scroll(0, 0)
+
+            }
+
+        });
 
 
 
@@ -639,12 +650,6 @@
         }
 
 
-        var currentPage = 1;
-        var cardsPerPage = 12;
-        var line = 0;
-        var data;
-        var selectedCategories = [];
-
         function displayData(page) {
             var startIndex = (page - 1) * cardsPerPage;
             var endIndex = page * cardsPerPage;
@@ -751,26 +756,34 @@
         }
 
 
+        var currentPage = 1;
+        var cardsPerPage = 12;
+        var line = 0;
+        var data;
+        var selectedCategories = [];
+
+
         function createPagination() {
             var totalPages = Math.ceil(data.length / cardsPerPage);
             var paginationContainer = document.getElementById('pagination');
             paginationContainer.innerHTML = ''; // Effacer le contenu de la pagination
 
-            var maxPageButtons = 10; // Nombre maximum de pages a afficher
+            var maxPageButtons = 10; // Nombre maximum de pages à afficher
+            var middlePage = Math.ceil(maxPageButtons / 2);
 
             var startPage = 1;
             var endPage = totalPages;
 
             if (totalPages > maxPageButtons) {
-                var middlePage = Math.ceil(maxPageButtons / 2);
                 if (currentPage > middlePage) {
                     startPage = currentPage - middlePage + 1;
                     endPage = currentPage + middlePage - 1;
                     if (endPage > totalPages) {
                         endPage = totalPages;
+                        startPage = endPage - maxPageButtons + 1;
                     }
                 } else {
-                    //http: //localhost:8009/api/v1/produit/?pattern=BETA
+                    endPage = maxPageButtons;
                 }
             }
 
@@ -840,5 +853,20 @@
         }
     </script>
 </body>
+<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 "></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/js/demo.js"></script>
 
 </html>

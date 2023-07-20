@@ -102,7 +102,7 @@
                                 <li><a class="m_tag" href="meteo.html">Meteo</a></li>
                                 <li><a class="m_tag" href="insecte.html">Insecte</a></li>
                                 <!-- <li><a class="m_tag" href="gallery.html">Gallery</a></li> -->
-                                <li><a class="m_tag" href="admin/dashboard.html">Dashboard</a></li>
+                                <!-- <li><a class="m_tag" href="admin/dashboard.html">Dashboard</a></li> -->
                                 <li><a class="m_tag" href="contact.html">Contact</a></li>
                                 <li class="dropdown dropdown-large">
                                     <a href="#" class="dropdown-toggle m_tag" data-toggle="dropdown">Qui sommes nous ?<b class="caret"></b></a>
@@ -333,7 +333,7 @@
 							    </select>
                             </div> -->
 
-                            <button type="submit" class="btn btn-primary">Inscription</button>
+                            <button type="submit" class="btn btn-primary">Connection</button>
                         </form>
 
 
@@ -517,7 +517,7 @@
                     }
                 })
                 .then(data => {
-                    const userDataElement = document.getElementById('userData');
+                    const userDataElement = document.getElementById('userDataConnect');
                     if (data.role === 'admin') {
                         userDataElement.textContent = `Welcome, Admin! Username: ${data.username}`;
                     } else if (data.role === 'editor') {
@@ -580,12 +580,13 @@
                         }
                     })
                     .then(data => {
+
                         if (data.role === 'admin') {
                             // Redirect admin to dashboard.html
                             window.location.href = '/admin/dashboard.html';
                         } else if (data.role === 'editor') {
                             // Redirect editor to index.html with suggest option
-                            window.location.href = '/index.html?suggest=true';
+                            window.location.href = '/editeur/index.html?username=' + formData['username'];
                         } else {
                             // Redirect visitor to index.html
                             window.location.href = '/index.html';
@@ -596,15 +597,15 @@
                         alert('connection echouee. Reesayer!!!');
                     });
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
             fetchUserData();
         });
 
-        //document.addEventListener('DOMContentLoaded', () => {
-        //    fetchUserData();
-        //});
-
         function fetchUserData() {
-            fetch('/api/v1/utilisateur')
+            // Fait une requête AJAX vers l'API route pour récupérer les données de l'utilisateur connecté
+            fetch('/api/login')
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -613,27 +614,30 @@
                     }
                 })
                 .then(data => {
-                    var connectionDropdown = document.getElementById('dropdownMenuButton');
-                    const userDataElement = document.getElementById('userData');
-                    if (data.role === 'admin') {
-                        userDataElement.textContent = `Welcome, Admin! Username: ${data.username}`;
-                    } else if (data.role === 'editor') {
-                        console.log('welcome : ', data.role)
-                        userDataElement.textContent = `Welcome, Editor! Username: ${data.username}`;
-                        connectionDropdown.style.display = 'none';
-                        //connectionDropdown.querySelector('.button').classList.remove('button');
-                        // Add the "dropdown-toggle" class to the anchor element
-                        //connectionDropdown.querySelector('a').classList.add('dropdown-toggle');
-                        // Add the necessary attributes for dropdown functionality
-                        //connectionDropdown.querySelector('a').setAttribute('role', 'button');
-                        //connectionDropdown.querySelector('a').setAttribute('data-toggle', 'dropdown');
-                        //connectionDropdown.querySelector('a').setAttribute('aria-haspopup', 'true');
-                        //connectionDropdown.querySelector('a').setAttribute('aria-expanded', 'false');
+                    // Sélectionne les éléments DOM réutilisés
+                    const connectionDropdown = document.getElementById('dropdownMenuButton');
+                    const userDataElement = document.getElementById('userDataConnect');
 
-                    } else {
-                        console.log('welcome : ', data.role)
-                        userDataElement.textContent = `Welcome, Visitor! Username: ${data.username}`;
-                        connectionDropdown.style.display = 'none';
+                    // Vérifie si data.role est défini avant d'accéder à ses propriétés
+                    if (data && data.role) {
+                        if (data.role === 'admin') {
+                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
+                            console.log(`Bienvenue :  ${data.username}`);
+                        } else if (data.role === 'editor') {
+                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
+                            // Utilise des classes CSS pour masquer et afficher les éléments
+                            connectionDropdown.style.display = 'none';
+                            connectionDropdown.querySelector('.button').classList.remove('button');
+                            connectionDropdown.querySelector('a').classList.add('dropdown-toggle');
+                            connectionDropdown.querySelector('a').setAttribute('role', 'button');
+                            connectionDropdown.querySelector('a').setAttribute('data-toggle', 'dropdown');
+                            connectionDropdown.querySelector('a').setAttribute('aria-haspopup', 'true');
+                            connectionDropdown.querySelector('a').setAttribute('aria-expanded', 'false');
+                        } else {
+                            userDataElement.textContent = `Bienvenue : ${data.username}`;
+                            // Utilise des classes CSS pour masquer et afficher les éléments
+                            connectionDropdown.style.display = 'none';
+                        }
                     }
                 })
                 .catch(error => {
@@ -689,5 +693,20 @@
         });
     </script>
 </body>
+<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 "></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/js/demo.js"></script>
 
 </html>

@@ -706,3 +706,62 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
+
+
+<
+script >
+    // Appeler l'API route pour récupérer les données
+    fetch('/api/v1/produit')
+    .then(response => response.json())
+    .then(data => {
+        // Extraire les données de la colonne "forme" uniquement
+        const formeData = data.data.map(item => item.forme);
+
+        // Compter le nombre d'occurrences de chaque forme
+        const formeCounts = formeData.reduce((counts, forme) => {
+            counts[forme] = (counts[forme] || 0) + 1;
+            return counts;
+        }, {});
+
+        // Trier les formes en fonction du nombre d'occurrences (du plus grand au plus petit)
+        const sortedFormes = Object.keys(formeCounts).sort((a, b) => formeCounts[b] - formeCounts[a]);
+
+        // Sélectionner les cinq formes les plus représentatives
+        const top5Formes = sortedFormes.slice(0, 5);
+
+        // Convertir les données en un tableau d'objets pour D3.js
+        const pieData = top5Formes.map(forme => ({
+            label: forme,
+            value: formeCounts[forme],
+        }));
+
+        // Créer le Pie Chart
+        const pie = d3.pie().value(d => d.value);
+
+        const arc = d3.arc().innerRadius(0).outerRadius(200);
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        const svg = d3.select("#chart-container")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 500)
+            .append("g")
+            .attr("transform", "translate(200,200)");
+
+        const arcs = svg.selectAll("arc")
+            .data(pie(pieData))
+            .enter()
+            .append("g");
+
+        arcs.append("path")
+            .attr("d", arc)
+            .attr("fill", (d, i) => color(i));
+
+        arcs.append("text")
+            .attr("transform", d => "translate(" + arc.centroid(d) + ")")
+            .attr("text-anchor", "middle")
+            .text(d => d.data.label);
+    })
+    .catch(error => console.error('Erreur lors de la récupération des données:', error)); <
+/script>
