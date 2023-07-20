@@ -1,16 +1,6 @@
-
-.card-body{
-    position: relative;
-}
-
 .description{
     height: 100%;
-    width: 80%;
-    margin-left: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* opacity: 0.5; */
-    color: white;
-    position: absolute;
-    /* transform: translate(-50%, -50%); */
-    display: none;
+    width: 100%;
+    background-color: black;
+    color: red;
 }
