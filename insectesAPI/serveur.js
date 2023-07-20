@@ -17,25 +17,9 @@ const pool = new Pool({
     
 });
    
-
+app.use(express.json())
 // création des endpoits avec les verbes(get,post,put,delete,putch)
 
-app.get('/P5_groupe1/API/insectes',(req,res) => {
-    // Recuperer tous les insectes nuisibles de la table insecte
-    pool.query('SELECT * from insecte',(error,resultats) =>{
-        if(error){
-            console.log('Error recuperation data:',error);
-            res.status(500).json({error:"Erreur lors de la recherche d 'insectes"});
-        } else {
-            const data = resultats.rows.map(row => {
-                const { id, nom,image_url,description_insecte,partie1,partie2,famille,diagnostic,id_service} = row;
-
-                return {id, nom,image_url,description_insecte,partie1,partie2,famille,diagnostic,id_service}
-            });
-            res.json(data);
-        }
-    });
-})
 
 // *********    création des endpoits avec les verbes(get,post,put,delete,putch)   *************
 
@@ -76,10 +60,10 @@ app.get('/P5_groupe1/API/insecte/:id', (req, res) => {
 // creer un insecte nuisible
 
 app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
-    const { nom, image, desc, partie1, partie2, famille,diagnostic,id_service} = req.body;
+    const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
 
     pool.query(
-            'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image, desc, partie1, partie2, famille,diagnostic,2]
+            'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service]
         )
         .then(() => {
             res.status(201).json({ message: 'création insecte réussi.' });
@@ -94,10 +78,9 @@ app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
 // Mis a jour d'un insectes
 app.put('/P5_groupe1/API/update_insecte/:id', (req, res) => {
     const id = req.params.id;
-    const { nom, image, desc, partie1, partie2, famille,diag} = req.body;
-
+    const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
     pool.query(
-            'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7 WHERE id = $7', [nom, image, desc, partie1, partie2, famille,diag, id]
+            'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service, id]
         )
         .then(() => {
             res.json({ message: `insecte avec id ${id} a été mise à jour` });

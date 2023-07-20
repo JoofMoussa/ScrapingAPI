@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // creation de la connexion a postgres
 const pool = new Pool({
-    user: 'musajoof',
+    user: 'defaultuser2',
     host: 'localhost',
     database: 'sunuapi',
     password: 'root123'
@@ -577,10 +577,19 @@ app.route('/api/v1/:table')
         } else if (table === 'produit') {
             query = 'SELECT id, image, modele, prix, conditionnement, forme, specialites FROM produit';
             nomTable = 'produit';
+<<<<<<< HEAD
         } else if (table === 'insecte') {
             query = 'SELECT * FROM insecte';
             nomTable = 'insecte';
         } else {
+=======
+        } 
+        else if(table === 'insecte'){
+            query = 'SELECT * FROM insecte';
+            nomTable = 'insecte';
+        }
+        else {
+>>>>>>> origin
             return res.status(404).json({ error: 'Table not found.' });
         }
         // ajouter a la requete si l utilisateur augmente un pattern
@@ -595,7 +604,10 @@ app.route('/api/v1/:table')
                 query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
             } else if (nomTable === 'produit') {
                 query += ` WHERE forme LIKE '%${pattern}%' OR modele LIKE '%${pattern}%'`;
+            }else if(nomTable ==='insecte'){
+                query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
             }
+
         }
 
         pool.query(query, (error, results) => {
@@ -683,12 +695,21 @@ app.route('/api/v1/:table')
                     console.error(`Error creating ${nomTable}:`, error);
                     res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
                 });
+<<<<<<< HEAD
         } else if (table === 'insecte') {
             const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
 
             pool.query(
                     'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
                 )
+=======
+         }else if (table === 'insecte') {
+            const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+
+            pool.query(
+                'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
+            )
+>>>>>>> origin
                 .then(() => {
                     res.status(201).json({ message: 'création insecte réussi.' });
                 })
@@ -696,7 +717,13 @@ app.route('/api/v1/:table')
                     console.error('erreur lors de la creation d insecte:', error);
                     res.status(500).json({ error: 'An error occurred while creating the insect.' });
                 });
+<<<<<<< HEAD
         } else {
+=======
+        }
+          
+        else {
+>>>>>>> origin
             return res.status(404).json({ error: 'Table not found.' });
         }
     })
@@ -773,6 +800,7 @@ app.route('/api/v1/:table')
                     console.error(`Error updating ${nomTable}:`, error);
                     res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
                 });
+<<<<<<< HEAD
         } else if (nomTable === 'insecte') {
 
             const id = req.params.id;
@@ -788,6 +816,25 @@ app.route('/api/v1/:table')
                     res.status(500).json({ error: 'An error occurred while updating the insect.' });
                 });
         } else {
+=======
+        } else if(nomTable === 'insecte'){
+
+            const id = req.params.id;
+            const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+            pool.query(
+                    'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service, id]
+        )
+        .then(() => {
+            res.json({ message: `insecte avec id ${id} a été mise à jour` });
+        })
+        .catch(error => {
+            console.error('erreur de mise à jour insecte', error);
+            res.status(500).json({ error: 'An error occurred while updating the insect.' });
+        });
+        }
+        
+        else {
+>>>>>>> origin
             return res.status(404).json({ error: 'Table not found.' });
         }
     })
@@ -816,7 +863,12 @@ app.route('/api/v1/:table')
         } else if (table === 'insecte') {
             query = 'DELETE FROM insecte WHERE id = $1';
             nomTable = 'insecte';
+<<<<<<< HEAD
         } else {
+=======
+        }
+        else {
+>>>>>>> origin
             return res.status(404).json({ error: 'Table not found.' });
         }
 
@@ -839,7 +891,11 @@ app.route('/api/v1/:table')
 app.get('/P5_groupe1/API/insecte/:id', (req, res) => {
     const id = req.params.id;
 
+<<<<<<< HEAD
     pool.query('SELECT * FROM insecte WHERE id = $1', [id])
+=======
+    pool.query('SELECT * FROM insecte WHERE id = $1',[id])
+>>>>>>> origin
         .then(result => {
             const data = result.rows[0]; // Recuperer la premiere ligne
             res.json(data);
@@ -857,8 +913,13 @@ app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
     const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
 
     pool.query(
+<<<<<<< HEAD
             'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
         )
+=======
+        'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
+    )
+>>>>>>> origin
         .then(() => {
             res.status(201).json({ message: 'création insecte réussi.' });
         })
@@ -872,9 +933,15 @@ app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
 // Mettre à jour d'un insectes
 app.put('/P5_groupe1/API/update_insecte/:id', (req, res) => {
     const id = req.params.id;
+<<<<<<< HEAD
     const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
     pool.query(
             'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service, id]
+=======
+    const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+    pool.query(
+            'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service, id]
+>>>>>>> origin
         )
         .then(() => {
             res.json({ message: `insecte avec id ${id} a été mise à jour` });
