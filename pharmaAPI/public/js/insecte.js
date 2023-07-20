@@ -1,3 +1,4 @@
+// const { geoClipRectangle } = require("d3");
 
 const { ceil } = Math;
 $(document).ready(function(){
@@ -81,7 +82,7 @@ function liste_insectes(page){
         var cardDescription = document.createElement('p');
         cardDescription.className = 'description';
         cardDescription.innerText = descrip;
-        cardcontent.appendChild(cardDescription);
+        cardBody.appendChild(cardDescription);
 
         var cardText = document.createElement('p');
         formeField = document.createElement('h6');
@@ -110,9 +111,84 @@ function liste_insectes(page){
         else{
             resultContainer.appendChild(cardColumn);
         }
+    
         
     });
+
+    const classcardBody = document.querySelectorAll('.card-body');
+   
+
+
+//     for(var i = 0; i < classcardBody.length;i++) {
+      
+//         var classcardBodyi = classcardBody[i];
+//         var desc_insectei = classcardBodyi.querySelector('.description');    
+//         console.log(desc_insectei.textContent);
+//         classcardBodyi.addEventListener('mouseover',function(){
+//             desc_insectei.style.display = 'block';
+
+//         });
+
+// }
+
+
+    
+
 }
+
+document.addEventListener('mouseover',function(event){
+    const classcardBody = document.querySelectorAll('.card-body');
+      classcardBody.forEach(card =>{
+    const desc_insectei = card.querySelector('.description'); 
+    if(card==event.target){
+        desc_insectei.style.display = 'block';
+    }
+  })
+})
+
+document.addEventListener('mouseout',function(event){
+    const classcardBody = document.querySelectorAll('.card-body');
+      classcardBody.forEach(card =>{
+    const desc_insectei = card.querySelector('.description'); 
+    if(card==event.target){
+        desc_insectei.style.display = 'none';
+    }
+  })
+})
+
+
+
+var classSelect = document.querySelector('#subject');
+
+classSelect.addEventListener('click',function(){
+    var optionValue = classSelect.value;
+    const url=`api/v1/insecte?pattern=${encodeURIComponent(optionValue)}`;
+    console.log(url);
+    fetch(url)
+        .then(function(response){
+            if(response.ok){
+                return response.json()
+            }
+            else{
+                return "Erreur lors de la requete"
+            }
+        })
+        .then(function(responseData){
+            les_insectes = responseData['data'];
+            liste_insectes(pageCourant);
+
+
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    
+});
+
+// cette fonction permet d'afficher  un certains nombre d'insectes à partir d'une famille choisie
+
+
+
 
 function createPagination(){
     var totalPages = Math.ceil(les_insectes.length / nbreElementPage);
@@ -203,9 +279,34 @@ function updatePagination() {
     });
 }
 
-var insecte = document.getElementsByClassName('img img-responsive img-thumbnail card-img');
-// insecte.addEventListener('click',function(event) =>{
+// var classcardBody = document.getElementsByClassName('card-body');
+// var desc_insecte = document.getElementsByClassName('description');
+
+// for(var i = 1; i < desc_insecte.length;i++) {
+//     console.log(classcardBody);
+//     var classcardBodyi = classcardBody[i];
+//     var desc_insectei = desc_insecte[i];    
+//     console.log(classcardBodyi);
+//     console.log("*****************************");
+//     console.log(desc_insectei);
+//     classcardBodyi.addEventListener('mousse',function(){
+//         desc_insectei.style.display = 'block';
+
+//     });
+
+// }
 
 
-// })
-console.log(insecte);
+// var classcardBody = document.querySelector('.card-body');
+// var desc_insecte = document.querySelector('.description');
+
+// console.log(classcardBody);
+// console.log("*****************************");
+// console.log(desc_insecte);
+
+// classcardBody.addEventListener('mouseover',function(){
+//     if(desc_insecte){
+//         desc_insecte.style.display = 'block';
+//     }
+// });
+

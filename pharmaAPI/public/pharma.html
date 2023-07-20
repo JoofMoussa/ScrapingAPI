@@ -514,12 +514,12 @@
                         return response.json(); // Renvoie les données de la réponse sous forme de JSON
                     } else {
                         throw new Error('Erreur lors de la requête.');
-                    }
+                }
                 })
                 .then(function(responseData) {
                     data = responseData['data'];
                     // Traitement des données de réponse
-                    console.log(data); // Affiche les données dans la console
+                // console.log(data); // Affiche les données dans la console
                     displayData(currentPage);
                     createPagination();
                 })

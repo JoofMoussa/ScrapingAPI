@@ -2,12 +2,12 @@ const express = require('express');
 const { Pool } = require('pg');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const jwt = require('jsonwebtoken');
 
 
 
 const app = express();
-const port = 8005; // Changement du port
+const port = 8021; // Changement du port
 
 app.use(bodyParser.json());
 // Demarrer a partir du repertoire "public"
@@ -63,6 +63,8 @@ app.post('/api/login', (req, res) => {
 
             // Send the data as JSON response
             res.json(data);
+            const token = jwt.sign({full_name:user.username,role:user.est_admin,role2:user.est_editeur},'secret_key',{expiresIn:'1h'});
+
         })
         .catch(error => {
             console.error('Erreur pendant la connexion:', error);
@@ -608,6 +610,8 @@ app.route('/api/v1/:table')
 //###################  endpoints Insectes  #################################################
 
 // *********    création des endpoits avec les verbes(get,post,put,delete,putch)   *************
+
+// recuperer les insectes pour pour famille donnée
 
 
 // recuperer un insecte par son identifiant
