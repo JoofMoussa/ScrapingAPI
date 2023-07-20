@@ -10,7 +10,9 @@ const app = express();
 const port = 8021; // Changement du port
 
 app.use(bodyParser.json());
+
 // Demarrer a partir du repertoire "public"
+// Middleware pour servir les fichiers HTML statiques
 app.use(express.static(path.join(__dirname, 'public')));
 
 // faire des requetes a partir du repertoire root
@@ -18,7 +20,7 @@ app.get('/', (req, res) => {
     // extraire les parametres de requete
     const query = req.query;
     // Serve the query.html page with the query parameters
-    res.sendFile(path.join(__dirname, 'public', 'index.html'),{
+    res.sendFile(path.join(__dirname, 'public', 'index.html'), {
         query: JSON.stringify(query),
     });
 });
@@ -29,17 +31,310 @@ const pool = new Pool({
     host: 'localhost',
     database: 'sunuapi',
     password: 'root123'
-        // dialect: "postgres",
-        // // pool est optionnel
-        // pool: {
-        //     max: 5,
-        //     min: 0,
-        //     acquire: 30000,
-        //     idle: 10000
-        // }
+
 });
 
-app.post('/api/login', (req, res) => {
+// Route pour s inscrire au site
+app.post('/inscription', async(req, res) => {
+    try {
+        const { username, mot_de_passe } = req.body;
+        const saltRounds = 10;
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(mot_de_passe, saltRounds);
+
+        // Store the hashed password in the database
+        const query = 'INSERT INTO utilisateur (username, mot_de_passe) VALUES ($1, $2)';
+        const values = [username, hashedPassword];
+        await pool.query(query, values);
+
+        res.status(201).json({ message: 'Utilisateur créé avec succès' });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de l\'inscription' });
+    }
+});
+
+
+
+// Route de connexion de l'utilisateur
+// app.post('/login', async(req, res) => {
+//     try {
+//         const { username, mot_de_passe } = req.body;
+
+//         const query = `
+//         SELECT * FROM utilisateur
+//         WHERE username = $1;
+//         `;
+
+//         const result = await pool.query(query, [username]);
+
+//         if (result.rows.length === 0) {
+//             return res.status(401).json({ error: 'Nom d\'utilisateur incorrect' });
+//         }
+
+//         const user = result.rows[0];
+//         const passwordMatch = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
+
+//         if (!passwordMatch) {
+//             return res.status(401).json({ error: 'Mot de passe incorrect' });
+//         }
+
+//         // Générer le token JWT
+//         const token = jwt.sign({ userId: user.id, roleadmin: user.est_admin, roleediteur: user.est_editeur },
+//             'votre_clé_secrète', { expiresIn: '1h' }
+//         );
+
+//         // Rediriger l'utilisateur vers la page correspondante en fonction de son rôle
+//         if (user.roleadmin) {
+//             return res.redirect('/admin/dashboard.html');
+//         } else if (user.roleediteur) {
+//             return res.redirect('/editeur/index.html');
+//         } else {
+//             return res.status(403).json({ error: 'Accès refusé' });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ error: 'Une erreur s\'est produite lors de la connexion' });
+//     }
+// });
+
+// Middleware pour vérifier l'authentification
+// const authenticateUser = (req, res, next) => {
+//     const token = req.headers.authorization;
+
+//     if (!token) {
+//         return res.status(401).json({ error: 'Token d\'authentification manquant' });
+//     }
+
+//     try {
+//         const decodedToken = jwt.verify(token, 'votre_clé_secrète');
+//         req.userData = { userId: decodedToken.userId, role: decodedToken.role };
+//         next();
+//     } catch (error) {
+//         res.status(401).json({ error: 'Token d\'authentification invalide' });
+//     }
+// };
+// Route pour le tableau de bord de l'administrateur
+// app.get('/admin/dashboard.html', authenticateUser, async(req, res) => {
+//     try {
+//         const { role } = req.userData;
+
+//         if (role !== 'admin') {
+//             return res.status(403).json({ error: 'Accès refusé' });
+//         }
+
+//             // Send the data as JSON response
+//             res.json(data);
+//             const token = jwt.sign({full_name:user.username,role:user.est_admin,role2:user.est_editeur},'secret_key',{expiresIn:'1h'});
+
+      
+//         .catch(error => {
+//             console.error('Erreur pendant la connexion:', error);
+//             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
+//         });
+// });
+
+// Route d'inscription d'un utilisateur
+app.post('/signup', async(req, res) => {
+    try {
+        const { username, mot_de_passe } = req.body;
+        const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+
+        const query = `
+        INSERT INTO utilisateur (username, mot_de_passe, role_utilisateur)
+        VALUES ($1, $2, $3)
+        RETURNING id_utilisateur;
+      `;
+
+        const values = [username, hashedPassword];
+        const result = await pool.query(query, values);
+
+        const userId = result.rows[0].id;
+
+        res.status(201).json({ message: 'Utilisateur créé avec succès', userId });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de l\'inscription' });
+    }
+});
+
+
+
+// Exemple de route protégée nécessitant une authentification
+app.get('/profile', authenticateUser, async(req, res) => {
+    try {
+        const { userId } = req.userData;
+
+        const query = `
+        SELECT * FROM utilisateurs
+        WHERE id_utilisateur = $1;
+      `;
+
+        const result = await pool.query(query, [userId]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Utilisateur non trouvé' });
+        }
+
+        const user = result.rows[0];
+
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la récupération du profil utilisateur' });
+    }
+});
+
+// Route de déconnexion de l'utilisateur (optionnelle)
+app.post('/logout', (req, res) => {
+    // Vous pouvez simplement détruire le token ici, car le JWT est auto-expirable
+    res.status(200).json({ message: 'Déconnexion réussie' });
+});
+
+// Route pour récupérer tous les services avec leurs suggestions de modifications
+app.get('/services', authenticateUser, async(req, res) => {
+    try {
+        const { role } = req.userData;
+
+        if (role !== 'admin') {
+            return res.status(403).json({ error: 'Accès refusé' });
+        }
+
+        const query = `
+        SELECT s.*, p.*
+        FROM services s
+        LEFT JOIN proposition_modifications p ON s.id_service = p.id_service
+        ORDER BY s.id_service;
+      `;
+
+        const result = await pool.query(query);
+
+        const services = [];
+        let currentService = null;
+
+        for (const row of result.rows) {
+            if (row.id_service !== (currentService && currentService.id_service)) {
+                currentService = {
+                    id_service: row.id_service,
+                    nom_service: row.nom_service,
+                    propositions: [],
+                };
+                services.push(currentService);
+            }
+
+            if (row.id_proposition) {
+                const proposition = {
+                    id_proposition: row.id_proposition,
+                    table_modifiee: row.table_modifiee,
+                    colonne_modifiee: row.colonne_modifiee,
+                    nouvelle_valeur: row.nouvelle_valeur,
+                    date_proposition: row.date_proposition,
+                    commentaire: row.commentaire,
+                };
+                currentService.propositions.push(proposition);
+            }
+        }
+
+        res.status(200).json({ services });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la récupération des services' });
+    }
+});
+
+
+
+// Route pour l'éditeur pour proposer une modification
+app.post('/services/:id_service/propositions', authenticateUser, async(req, res) => {
+    try {
+        const { role, userId } = req.userData;
+        const { id_service } = req.params;
+        const { table_modifiee, colonne_modifiee, nouvelle_valeur, commentaire } = req.body;
+
+        if (role !== 'editeur') {
+            return res.status(403).json({ error: 'Accès refusé' });
+        }
+
+        const query = `
+        INSERT INTO proposition_modifications (id_utilisateur, id_service, table_modifiee, colonne_modifiee, nouvelle_valeur, date_proposition, commentaire)
+        VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, $6)
+        RETURNING id_proposition;
+      `;
+
+        const values = [userId, id_service, table_modifiee, colonne_modifiee, nouvelle_valeur, commentaire];
+        const result = await pool.query(query, values);
+
+        const propositionId = result.rows[0].id_proposition;
+
+        res.status(201).json({ message: 'Proposition de modification créée avec succès', propositionId });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la proposition de modification' });
+    }
+});
+
+// Route pour l'administrateur pour valider une proposition de modification
+app.put('/services/:id_service/propositions/:id_proposition', authenticateUser, async(req, res) => {
+    try {
+        const { role } = req.userData;
+        const { id_service, id_proposition } = req.params;
+
+        if (role !== 'admin') {
+            return res.status(403).json({ error: 'Accès refusé' });
+        }
+
+        const query = `
+        UPDATE proposition_modifications
+        SET validee = true
+        WHERE id_proposition = $1;
+      `;
+
+        await pool.query(query, [id_proposition]);
+
+        // Effectuer la modification dans la base de données en fonction de la proposition
+
+        res.status(200).json({ message: 'Proposition de modification validée avec succès' });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la validation de la proposition de modification' });
+    }
+});
+
+// Route pour le tableau de bord de l'administrateur
+app.get('/dashboard', authenticateUser, async(req, res) => {
+    try {
+        const { role } = req.userData;
+
+        if (role !== 'admin') {
+            return res.status(403).json({ error: 'Accès refusé' });
+        }
+
+        // Récupérer les informations nécessaires pour le tableau de bord de l'administrateur
+        // ... votre logique de récupération des données ...
+
+        res.status(200).json({ message: 'Tableau de bord de l\'administrateur' });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la récupération des données' });
+    }
+});
+
+// Route pour la plateforme de suggestions de l'éditeur
+app.post('/suggestions', authenticateUser, async(req, res) => {
+    try {
+        const { role } = req.userData;
+
+        if (role !== 'editeur') {
+            return res.status(403).json({ error: 'Accès refusé' });
+        }
+
+        const { id_utilisateur, id_service, table_modifiee, colonne_modifiee, nouvelle_valeur, commentaire } = req.body;
+
+        // Enregistrer la proposition de modification dans la table Propositions
+        // ... votre logique d'enregistrement de la proposition ...
+
+        res.status(201).json({ message: 'Proposition de modification soumise avec succès' });
+    } catch (error) {
+        res.status(500).json({ error: 'Une erreur s\'est produite lors de la soumission de la proposition' });
+    }
+});
+
+
+
+app.post('/api/login', async(req, res) => {
     const { username, password } = req.body;
 
     pool.query("SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2", [username, password])
@@ -63,167 +358,12 @@ app.post('/api/login', (req, res) => {
 
             // Send the data as JSON response
             res.json(data);
-            const token = jwt.sign({full_name:user.username,role:user.est_admin,role2:user.est_editeur},'secret_key',{expiresIn:'1h'});
-
         })
         .catch(error => {
             console.error('Erreur pendant la connexion:', error);
             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
         });
 });
-
-
-// app.post('/api/login', (req, res) => {
-//     const { username, password, role } = req.body;
-
-//     pool.query("SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2 ", [username, password])
-//         .then(result => {
-//             const user = result.rows[0];
-//             console.log(user);
-//             if (!user) {
-//                 return res.status(401).json({ error: 'Nom d utilisateur ou mot de passe incorrecte.' });
-//             }
-
-//             // Check if the user is connected
-//             const isConnected = true; // Replace this with your actual condition to check if the user is connected
-
-//             // Prepare the data to be sent to the dashboard
-//             const data = {
-//                 username: username,
-//                 isConnected: isConnected
-//             };
-
-//             // Send the data as JSON response
-//             res.json(data);
-//         })
-//         .catch(error => {
-//             console.error('Erreur pendant la connexion:', error);
-//             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
-//         });
-// });
-
-// app.post('/api/login', (req, res) => {
-//     const { username, password, role } = req.body;
-
-//     pool.query("SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2 ", [username, password])
-//         .then(result => {
-//             const user = result.rows[0];
-//             console.log(user);
-//             if (!user) {
-//                 return res.status(401).json({ error: 'Nom d utilisateur ou mot de passe incorrecte.' });
-//             }
-
-//             // Check if the user is connected
-//             const isConnected = true; // Replace this with your actual condition to check if the user is connected
-
-//             // Prepare the redirect URL
-//             let redirectUrl = '';
-//             if (user.est_admin && isConnected) {
-//                 console.log('admin connecte');
-//                 // Redirect admin to dashboard.html
-//                 //redirectUrl = 'admin/dashboard.html';
-//                 redirectUrl = 'admin/dashboard.html?username=' + encodeURIComponent(username);
-//             } else if (user.est_editeur && isConnected) {
-//                 console.log('editeur connecte');
-//                 // Redirect editor to index.html with suggest option
-//                 redirectUrl = '/index.html?suggestion=true';
-//             } else if (isConnected) {
-//                 // Redirect visitor to index.html
-//                 console.log('visiteur connecte');
-//                 redirectUrl = '/index.html';
-//             } else {
-//                 // Handle the case when the user is not connected
-//                 console.log('user not connected');
-//                 return res.status(401).json({ error: 'Utilisateur non connecté.' });
-//             }
-
-//             // Send the redirect URL as JSON response
-//             res.json({ redirectUrl });
-//         })
-//         .catch(error => {
-//             console.error('Erreur pendant la connexion:', error);
-//             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
-//         });
-// });
-
-// app.post('/api/login', (req, res) => {
-//     const { username, password, role } = req.body;
-
-//     pool.query("SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2 ", [username, password])
-//         .then(result => {
-//             const user = result.rows[0];
-//             console.log(user);
-//             if (!user) {
-//                 return res.status(401).json({ error: 'Nom d utilisateur ou mot de passe incorrecte.' });
-//             }
-
-//             // Check if the user is connected
-//             const isConnected = true; // Replace this with your actual condition to check if the user is connected
-
-//             // Redirect based on user role and connection status
-//             if (user.est_admin && isConnected) {
-//                 console.log('admin connecte');
-//                 // Redirect admin to dashboard.html
-//                 //return res.redirect('/dashboard.html');
-//                 // Redirect admin to dashboard.html
-//                 return res.json({ redirectUrl: '/dashboard.html' });
-
-//             } else if (user.est_editeur && isConnected) {
-//                 console.log('editeur connecte');
-//                 // Redirect editor to index.html with suggest option
-//                 return res.redirect('/index.html?suggest=true');
-//             } else if (isConnected) {
-//                 // Redirect visitor to index.html
-//                 console.log('visiteur connecte');
-//                 return res.redirect('/index.html');
-//             } else {
-//                 // Handle the case when the user is not connected
-//                 console.log('user not connected');
-//                 return res.status(401).json({ error: 'Utilisateur non connecté.' });
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Erreur pendant la connexion:', error);
-//             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
-//         });
-// });
-
-
-// app.post('/api/login', (req, res) => {
-//     const { username, password, role } = req.body;
-
-//     pool.query("SELECT * FROM utilisateur WHERE username = $1 AND mot_de_passe = $2 ", [username, password])
-//         .then(result => {
-//             const user = result.rows[0];
-//             console.log(user);
-//             if (!user) {
-//                 return res.status(401).json({ error: 'Nom d utilisateur ou mot de passe incorrecte.' });
-//             }
-//             console.log(user.est_admin);
-//             // verifier que l utilisateur est un admin  et le transferer vers le dashboard
-//             if (user.est_admin === true) {
-//                 //console.log('admin connecte');
-//                 // Redirection admin  dashboard.html
-//                 return res.redirect('public/admin/dashboard.html');
-//                 //res.sendFile(path.join(__dirname, 'public/admin', 'dashboard.html'), {
-//                 //    query: JSON.stringify(user.est_admin),
-//                 //});
-//             } else if (user.est_editeur) {
-//                 //console.log('editeur connecte');
-//                 // Redirect editor to index.html with suggest option
-//                 return res.redirect('index.html?suggest=true');
-//             } else {
-//                 // Redirect visitor to index.html
-//                 return res.redirect('index.html');
-//                 //console.log('visiteur connecte');
-
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Erreur pendant la connexion:', error);
-//             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
-//         });
-// });
 
 
 
@@ -323,6 +463,51 @@ app.get('/api/produitbyid/:id', async(req, res) => {
     }
 });
 
+app.route('/api/v1/utilisateurs/count')
+    .get((req, res) => {
+        const query = 'SELECT COUNT(*) AS userCount FROM utilisateur';
+
+        pool.query(query, (error, results) => {
+            if (error) {
+                console.error('Error retrieving user count:', error);
+                res.status(500).json({ error: 'An error occurred while retrieving user count.' });
+            } else {
+                const userCount = results.rows[0].usercount;
+                res.json({ userCount });
+            }
+        });
+    });
+
+app.route('/api/v1/produits/count')
+    .get((req, res) => {
+        const query = 'SELECT COUNT(*) AS productCount FROM produit';
+
+        pool.query(query, (error, results) => {
+            if (error) {
+                console.error('Error retrieving product count:', error);
+                res.status(500).json({ error: 'An error occurred while retrieving product count.' });
+            } else {
+                const productCount = results.rows[0].productcount;
+                res.json({ productCount });
+            }
+        });
+    });
+
+app.route('/api/v1/insectes/count')
+    .get((req, res) => {
+        const query = 'SELECT COUNT(*) AS insecteCount FROM insecte';
+
+        pool.query(query, (error, results) => {
+            if (error) {
+                console.error('Error retrieving product count:', error);
+                res.status(500).json({ error: 'An error occurred while retrieving product count.' });
+            } else {
+                const insecteCount = results.rows[0].insectecount;
+                res.json({ insecteCount });
+            }
+        });
+    });
+
 
 app.route('/api/v1/:table')
     .get((req, res) => {
@@ -345,14 +530,12 @@ app.route('/api/v1/:table')
             query = 'SELECT * FROM medicament';
             nomTable = 'medicament';
         } else if (table === 'produit') {
-            query = 'SELECT * FROM produit';
+            query = 'SELECT id, image, modele, prix, conditionnement, forme, specialites FROM produit';
             nomTable = 'produit';
-        } 
-        else if(table === 'insecte'){
+        } else if (table === 'insecte') {
             query = 'SELECT * FROM insecte';
             nomTable = 'insecte';
-        }
-        else {
+        } else {
             return res.status(404).json({ error: 'Table not found.' });
         }
         // ajouter a la requete si l utilisateur augmente un pattern
@@ -363,12 +546,11 @@ app.route('/api/v1/:table')
                 query += ` WHERE UPPER(nom_generique) LIKE '%${pattern}%' OR UPPER(nom_standard) LIKE '%${pattern}%'`;
             } else if (nomTable === 'medicament') {
                 query += ` WHERE nom_generique LIKE '%${pattern}%' OR nom_standard LIKE '%${pattern}%'`;
+            } else if (nomTable === 'insecte') {
+                query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
             } else if (nomTable === 'produit') {
                 query += ` WHERE forme LIKE '%${pattern}%' OR modele LIKE '%${pattern}%'`;
-            }else if(nomTable ==='insecte'){
-                query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
             }
-
         }
 
         pool.query(query, (error, results) => {
@@ -394,7 +576,8 @@ app.route('/api/v1/:table')
             const { username, mot_de_passe, est_admin, est_editeur } = data;
             query = 'INSERT INTO utilisateur (username, mot_de_passe, est_admin, est_editeur) VALUES ($1, $2, $3, $4)';
             nomTable = 'utilisateur';
-            const values = [username, mot_de_passe, est_admin, est_editeur];
+            const hashedPassword = bcrypt.hash(mot_de_passe, 10);
+            const values = [username, hashedPassword, est_admin, est_editeur];
             pool.query(query, values)
                 .then(() => {
                     res.status(201).json({ message: `${nomTable} created successfully.` });
@@ -455,12 +638,12 @@ app.route('/api/v1/:table')
                     console.error(`Error creating ${nomTable}:`, error);
                     res.status(500).json({ error: `An error occurred while creating the ${nomTable}.` });
                 });
-         }else if (table === 'insecte') {
+        } else if (table === 'insecte') {
             const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
 
             pool.query(
-                'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
-            )
+                    'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
+                )
                 .then(() => {
                     res.status(201).json({ message: 'création insecte réussi.' });
                 })
@@ -468,9 +651,7 @@ app.route('/api/v1/:table')
                     console.error('erreur lors de la creation d insecte:', error);
                     res.status(500).json({ error: 'An error occurred while creating the insect.' });
                 });
-        }
-          
-        else {
+        } else {
             return res.status(404).json({ error: 'Table not found.' });
         }
     })
@@ -547,23 +728,21 @@ app.route('/api/v1/:table')
                     console.error(`Error updating ${nomTable}:`, error);
                     res.status(500).json({ error: `An error occurred while updating the ${nomTable}.` });
                 });
-        } else if(nomTable === 'insecte'){
+        } else if (nomTable === 'insecte') {
 
             const id = req.params.id;
-            const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+            const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
             pool.query(
-                    'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service, id]
-        )
-        .then(() => {
-            res.json({ message: `insecte avec id ${id} a été mise à jour` });
-        })
-        .catch(error => {
-            console.error('erreur de mise à jour insecte', error);
-            res.status(500).json({ error: 'An error occurred while updating the insect.' });
-        });
-        }
-        
-        else {
+                    'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service, id]
+                )
+                .then(() => {
+                    res.json({ message: `insecte avec id ${id} a été mise à jour` });
+                })
+                .catch(error => {
+                    console.error('erreur de mise à jour insecte', error);
+                    res.status(500).json({ error: 'An error occurred while updating the insect.' });
+                });
+        } else {
             return res.status(404).json({ error: 'Table not found.' });
         }
     })
@@ -592,8 +771,7 @@ app.route('/api/v1/:table')
         } else if (table === 'insecte') {
             query = 'DELETE FROM insecte WHERE id = $1';
             nomTable = 'insecte';
-        }
-        else {
+        } else {
             return res.status(404).json({ error: 'Table not found.' });
         }
 
@@ -618,7 +796,7 @@ app.route('/api/v1/:table')
 app.get('/P5_groupe1/API/insecte/:id', (req, res) => {
     const id = req.params.id;
 
-    pool.query('SELECT * FROM insecte WHERE id = $1',[id])
+    pool.query('SELECT * FROM insecte WHERE id = $1', [id])
         .then(result => {
             const data = result.rows[0]; // Recuperer la premiere ligne
             res.json(data);
@@ -636,8 +814,8 @@ app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
     const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
 
     pool.query(
-        'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
-    )
+            'INSERT INTO insecte (nom, image_url,description_insecte, partie1, partie2, famille,diagnostic,id_service) VALUES ($1, $2, $3, $4, $5, $6,$7,$8)', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service]
+        )
         .then(() => {
             res.status(201).json({ message: 'création insecte réussi.' });
         })
@@ -651,9 +829,9 @@ app.post('/P5_groupe1/API/ajout_insecte', (req, res) => {
 // Mettre à jour d'un insectes
 app.put('/P5_groupe1/API/update_insecte/:id', (req, res) => {
     const id = req.params.id;
-    const { nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service} = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+    const { nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
     pool.query(
-            'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille,diagnostic,id_service, id]
+            'UPDATE insecte SET nom = $1, image_url = $2, description_insecte = $3, partie1 = $4, partie2 = $5, famille = $6,diagnostic = $7,id_service = $8 WHERE id = $9', [nom, image_url, description_insecte, partie1, partie2, famille, diagnostic, id_service, id]
         )
         .then(() => {
             res.json({ message: `insecte avec id ${id} a été mise à jour` });
@@ -687,11 +865,10 @@ app.delete('/P5_groupe1/API/delete_insecte/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Acceder au serveur http://localhost:${port}`);
     console.log(`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`);
-    console.log(`POST   => Ajouter utilisateur     http://localhost:${port}/api/v2/utilisateur`);
+    console.log(`GET    => Voir utilisateur        http://localhost:${port}/api/v1/utilisateur`);
+    console.log(`GET    => Voir les medicaments    http://localhost:${port}/api/v1/medicaments`);
+    console.log(`GET    => voir insecte                http://localhost:${port}/api/v1/insecte`);
     console.log(`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`);
-    console.log(`GET    => Recuperer tout les medicaments http://localhost:${port}/api/v1/medicaments`);
-    console.log(`POST   => Ajout de medicaments http://localhost:${port}/api/v2/medicaments`);
-    console.log(`UPDATE => MIS A JOUR des medicaments  http://localhost:${port}/api/v3/medicaments`);
-    console.log(`DELETE => Effacer les medicaments  http://localhost:${port}/api/v4/medicaments`);
+
 
 });
