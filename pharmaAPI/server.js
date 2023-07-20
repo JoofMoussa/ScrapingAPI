@@ -12,6 +12,17 @@ const port = 8009; // Changement du port
 // Demarrer a partir du repertoire "public"
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Récupérer toutes les données météo
+app.get('/donne_meteo', (req, res) => {
+    pool.query('SELECT * FROM donne_meteo', (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erreur lors de la récupération des données météo.' });
+      } else {
+        res.json(results.rows);
+      }
+    });
+  }); 
 // faire des requetes a partir du repertoire root
 app.get('/', (req, res) => {
     // extraire les parametres de requete
@@ -25,7 +36,7 @@ app.get('/', (req, res) => {
 
 // creation de la connexion a postgres
 const pool = new Pool({
-    user: 'defaultuser2',
+    user: 'musajoof',
     host: 'localhost',
     database: 'sunuapi',
     password: 'root123'
