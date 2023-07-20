@@ -1,0 +1,102 @@
+/*********************shop****************/
+
+.mypics {
+    inline-size: 340;
+    block-size: 340;
+}
+
+.mtop10 {
+    margin-block-start: 10px;
+    ;
+}
+
+.main_o {
+    background: #333;
+}
+
+#shop {
+    padding-block-start: 40px;
+    padding-block-end: 20px;
+}
+
+.shop_1l .form_1 {
+    margin-inline-end: 5px;
+}
+
+.shop_1l1 .input-group {
+    margin-block-start: 15px;
+}
+
+.shop_1l1 .form-control {
+    block-size: 50px;
+    font-size: 18px;
+}
+
+.shop_1l1 .btn {
+    padding: 11.5px 18px;
+    background: #2a93c9;
+    font-size: 18px;
+}
+
+.shop_1l1 {
+    margin-block-start: 20px;
+}
+
+.shop_1l {
+    margin-block-start: 20px;
+}
+
+.ui-content {
+    margin-block-start: 15px;
+}
+
+.shop_1li {
+    margin-block-start: 20px;
+}
+
+.shop_1r .form-control {
+    block-size: 50px;
+    font-size: 18px;
+    border-radius: 0;
+    margin-block-start: 15px;
+}
+
+.shop_1r p {
+    margin-block-start: 70px;
+}
+
+.shop_1r1 {
+    margin-block-start: 30px;
+}
+
+.shop_1r2 {
+    margin-block-start: 20px;
+}
+
+
+/*********************shop_end****************/
+
+@media screen and (max-inline-size: 767px) {
+    #shop {
+        text-align: center;
+    }
+    .shop_1li h6 {
+        margin-block-start: 10px!important;
+    }
+    .shop_1r p {
+        margin-block-start: 15px;
+        text-align: center;
+    }
+    .shop_1r1i {
+        margin-block-start: 15px;
+    }
+    .shop_1r {
+        margin-block-start: 15px;
+    }
+}
+
+@media (min-inline-size:768px) and (max-inline-size:991px) {}
+
+@media (min-inline-size:992px) and (max-inline-size:1200px) {}
+
+@media (min-inline-size:1201px) and (max-inline-size:1280px) {}
