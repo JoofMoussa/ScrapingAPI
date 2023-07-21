@@ -9,12 +9,17 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/global.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
 </head>
+<style>
+    .show {
+        display: none;
+    }
+</style>
 
 <body>
     <div class="main clearfix">
@@ -58,9 +63,9 @@
                                                                     <div class="input-group">
                                                                         <input type="text" class="form-control" placeholder="Search" style="min-width: 300px;">
                                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-primary" type="button">
-                                                                Search</button>
-                                                        </span> </div>
+															<button class="btn btn-primary" type="button">
+																Search</button>
+														</span> </div>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -305,8 +310,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+					<span aria-hidden="true">&times;</span>
+				</button>
                     </div>
                     <div class="modal-body">
                         <form id="loginForm">
@@ -325,10 +330,10 @@
                                     <option value="admin">Admin</option>
                                     <option value="visitor">Visiteur</option>
                                     <option value="editor">Editeur</option>
-                                </select>
+							    </select>
                             </div> -->
 
-                            <button type="submit" class="btn btn-primary">Inscription</button>
+                            <button type="submit" class="btn btn-primary">Connection</button>
                         </form>
 
 
@@ -367,8 +372,8 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
+    </div>
 
 
 
@@ -477,7 +482,7 @@
             </div>
         </div>
     </section>
-    <script src="js/config.js"></script>
+
     <script>
         $(document).ready(function() {
 
@@ -493,22 +498,200 @@
             });
 
         });
+
+
+        //espace inscription
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUserData();
+            document.getElementById('logoutButton').addEventListener('click', logout);
+        });
+
+        function fetchUserData() {
+            fetch('/api/v1/utilisateur')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch user data');
+                    }
+                })
+                .then(data => {
+                    const userDataElement = document.getElementById('userDataConnect');
+                    if (data.role === 'admin') {
+                        userDataElement.textContent = `Welcome, Admin! Username: ${data.username}`;
+                    } else if (data.role === 'editor') {
+                        userDataElement.textContent = `Welcome, Editor! Username: ${data.username}`;
+                    } else {
+                        userDataElement.textContent = `Welcome, Visitor! Username: ${data.username}`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function logout() {
+            fetch('/api/logout', {
+                    method: 'POST'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Redirect to login page or perform any other desired action
+                        window.location.href = '/login.html';
+                    } else {
+                        throw new Error('Logout failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                const formData = {
+                    username: username,
+                    password: password
+                };
+
+                console.log(formData);
+                // Send a POST request to the server
+                fetch('/api/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('connection echouee');
+                        }
+                    })
+                    .then(data => {
+
+                        if (data.role === 'admin') {
+                            // Redirect admin to dashboard.html
+                            window.location.href = '/admin/dashboard.html';
+                        } else if (data.role === 'editor') {
+                            // Redirect editor to index.html with suggest option
+                            window.location.href = '/editeur/index.html?username=' + formData['username'];
+                        } else {
+                            // Redirect visitor to index.html
+                            window.location.href = '/index.html';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Echec connexion:', error);
+                        alert('connection echouee. Reesayer!!!');
+                    });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUserData();
+        });
+
+        function fetchUserData() {
+            // Fait une requête AJAX vers l'API route pour récupérer les données de l'utilisateur connecté
+            fetch('/api/login')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch user data');
+                    }
+                })
+                .then(data => {
+                    // Sélectionne les éléments DOM réutilisés
+                    const connectionDropdown = document.getElementById('dropdownMenuButton');
+                    const userDataElement = document.getElementById('userDataConnect');
+
+                    // Vérifie si data.role est défini avant d'accéder à ses propriétés
+                    if (data && data.role) {
+                        if (data.role === 'admin') {
+                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
+                            console.log(`Bienvenue :  ${data.username}`);
+                        } else if (data.role === 'editor') {
+                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
+                            // Utilise des classes CSS pour masquer et afficher les éléments
+                            connectionDropdown.style.display = 'none';
+                            connectionDropdown.querySelector('.button').classList.remove('button');
+                            connectionDropdown.querySelector('a').classList.add('dropdown-toggle');
+                            connectionDropdown.querySelector('a').setAttribute('role', 'button');
+                            connectionDropdown.querySelector('a').setAttribute('data-toggle', 'dropdown');
+                            connectionDropdown.querySelector('a').setAttribute('aria-haspopup', 'true');
+                            connectionDropdown.querySelector('a').setAttribute('aria-expanded', 'false');
+                        } else {
+                            userDataElement.textContent = `Bienvenue : ${data.username}`;
+                            // Utilise des classes CSS pour masquer et afficher les éléments
+                            connectionDropdown.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('inscriptionClient');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent form from being submitted normally
+
+                const username = document.getElementById('user_insc').value.trim();
+                const mot_de_passe = document.getElementById('passw_insc').value.trim();
+                const confirmPassword = document.getElementById('confirmPassword').value.trim();
+                const est_admin = false;
+                const est_editeur = false;
+                console.log(mot_de_passe);
+                console.log(confirmPassword);
+
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    console.log("Les mots de passes sont differents");
+                    return;
+                }
+
+                const formData = {
+                    username: username,
+                    mot_de_passe: mot_de_passe,
+                    est_admin: est_admin,
+                    est_editeur: est_editeur
+                };
+
+                // Send an HTTP POST request to the server
+                fetch('/api/v1/utilisateur', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Utilisateur Cree:', data);
+                        // Optionally, perform any additional actions suh as showing a success message or redirecting to another page
+                    })
+                    .catch(error => {
+                        console.error('Erreur de creation de L utilisateur:', error);
+                    });
+            });
+        });
     </script>
 </body>
 
 </html>
-<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!--  Chartist Plugin  -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 "></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
