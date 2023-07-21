@@ -614,8 +614,8 @@ app.route('/api/v1/:table')
             const { username, mot_de_passe, est_admin, est_editeur } = data;
             query = 'INSERT INTO utilisateur (username, mot_de_passe, est_admin, est_editeur) VALUES ($1, $2, $3, $4)';
             nomTable = 'utilisateur';
-            const hashedPassword = bcrypt.hash(mot_de_passe, 10);
-            const values = [username, hashedPassword, est_admin, est_editeur];
+            //const hashedPassword = bcrypt.hash(mot_de_passe, 10);
+            const values = [username, mot_de_passe, est_admin, est_editeur];
             pool.query(query, values)
                 .then(() => {
                     res.status(201).json({ message: `${nomTable} created successfully.` });
