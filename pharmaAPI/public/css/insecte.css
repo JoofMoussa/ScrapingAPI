@@ -1,6 +1,15 @@
-.description{
+.card-body {
+    position: relative;
+}
+
+.description {
     height: 100%;
     width: 100%;
     background-color: black;
-    color: red;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: none;
 }

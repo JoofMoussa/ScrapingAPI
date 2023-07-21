@@ -157,7 +157,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="shop_1 clearfix">
-                    <div class="col-sm-3 bg_1"><!-- la partie gauche qui est la recherche -->
+                    <div class="col-sm-3 bg_1">
                         <div class="shop_1l1 clearfix">
                             <h3 class="col_1 mgt">Rechercher un produit</h3>
                             <form id="rechercheProduit">
@@ -285,7 +285,10 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Entrer votremot de passe">
                             </div>
-
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmer mot de passe">
+                            </div>
                             <div class="form-group">
                                 <label for="role">Role</label>
                                 <select class="form-control" id="role">
@@ -387,7 +390,7 @@
 
 
 
-
+    <script src="js/pharma.js"></script>
     <script>
         $(document).ready(function() {
             var secondaryNav = $('.cd-secondary-nav'),
@@ -401,6 +404,7 @@
             });
 
         });
+<<<<<<< HEAD
 
         //Tri par defaut
         fetch('/api/v1/formeproduitpharma')
@@ -851,6 +855,8 @@
                 }
             });
         }
+=======
+>>>>>>> main
     </script>
 </body>
 <script src="../assets/js/core/jquery.3.2.1.min.js"></script>

@@ -1,6 +1,7 @@
+// const { geoClipRectangle } = require("d3");
 
 const { ceil } = Math;
-$(document).ready(function(){
+$(document).ready(function() {
     var secondaryNav = $('.cd-secondary-nav'),
         secondaryNavTopPosition = secondaryNav.offset().top;
     $(window).on('scroll', function() {
@@ -15,21 +16,20 @@ $(document).ready(function(){
 // consommation de l'api avec fetch
 
 fetch('api/v1/insecte')
-    .then(function(response){
-        if(response.ok){
+    .then(function(response) {
+        if (response.ok) {
             return response.json()
-        }
-        else{
+        } else {
             throw new Error("une erreur s'est produite")
         }
     })
-    .then(function(responseData){
+    .then(function(responseData) {
         les_insectes = responseData['data'];
-       
+
         liste_insectes(pageCourant);
         createPagination()
     })
-    .catch(function(error){
+    .catch(function(error) {
         console.log(error)
     });
 
@@ -39,12 +39,12 @@ var nbreElementPage = 12;
 var line = 0;
 
 // parcours des insectes et création de cartes pour l'affichage
-function liste_insectes(page){
-    var startIndex = (page -1) * nbreElementPage;
+function liste_insectes(page) {
+    var startIndex = (page - 1) * nbreElementPage;
     var endIndex = page * nbreElementPage;
     var resultContainer = document.getElementById('result');
     resultContainer.innerHTML = '';
-    les_insectes.slice(startIndex,endIndex).forEach(function(item){
+    les_insectes.slice(startIndex, endIndex).forEach(function(item) {
         var id = item.id;
         var nom_insecte = item.nom
         var image = item.image_url;
@@ -52,7 +52,7 @@ function liste_insectes(page){
         var partie1 = item.partie1;
         var partie2 = item.partie2;
         var famille = item.famille;
-        var diagnostic =  item.diagnostic;
+        var diagnostic = item.diagnostic;
         var id_service = item.id_service;
         line += 1;
         // creation des cartes
@@ -68,7 +68,7 @@ function liste_insectes(page){
         var imgcontent = document.createElement('img')
         imgcontent.className = 'img img-responsive img-thumbnail card-img';
         path = image;
-        imgcontent.setAttribute('src',path);
+        imgcontent.setAttribute('src', path);
         var card = document.createElement('div');
         card.className = 'card mtop10';
 
@@ -81,7 +81,7 @@ function liste_insectes(page){
         var cardDescription = document.createElement('p');
         cardDescription.className = 'description';
         cardDescription.innerText = descrip;
-        cardcontent.appendChild(cardDescription);
+        cardBody.appendChild(cardDescription);
 
         var cardText = document.createElement('p');
         formeField = document.createElement('h6');
@@ -101,41 +101,110 @@ function liste_insectes(page){
 
         cardcontent.appendChild(card);
         cardColumn.appendChild(cardcontent);
-        if(line === 4){
+        if (line === 4) {
             // console.log('ligne :' +line);
             cardby.appendChild(cardColumn);
             resultContainer.appendChild(cardby);
             line = 0;
-        }
-        else{
+        } else {
             resultContainer.appendChild(cardColumn);
         }
-        
+
+
     });
+
+    const classcardBody = document.querySelectorAll('.card-body');
+
+
+
+    //     for(var i = 0; i < classcardBody.length;i++) {
+
+    //         var classcardBodyi = classcardBody[i];
+    //         var desc_insectei = classcardBodyi.querySelector('.description');    
+    //         console.log(desc_insectei.textContent);
+    //         classcardBodyi.addEventListener('mouseover',function(){
+    //             desc_insectei.style.display = 'block';
+
+    //         });
+
+    // }
+
+
+
+
 }
 
-function createPagination(){
+document.addEventListener('mouseover', function(event) {
+    const classcardBody = document.querySelectorAll('.card-body');
+    classcardBody.forEach(card => {
+        const desc_insectei = card.querySelector('.description');
+        if (card == event.target) {
+            desc_insectei.style.display = 'block';
+        }
+    })
+})
+
+document.addEventListener('mouseout', function(event) {
+    const classcardBody = document.querySelectorAll('.card-body');
+    classcardBody.forEach(card => {
+        const desc_insectei = card.querySelector('.description');
+        if (card == event.target) {
+            desc_insectei.style.display = 'none';
+        }
+    })
+})
+
+
+
+// var classSelect = document.querySelector('#subject');
+
+// classSelect.addEventListener('click', function() {
+//     var optionValue = classSelect.value;
+//     const url = `api/v1/insecte?pattern=${encodeURIComponent(optionValue)}`;
+//     console.log(url);
+//     fetch(url)
+//         .then(function(response) {
+//             if (response.ok) {
+//                 return response.json()
+//             } else {
+//                 return "Erreur lors de la requete"
+//             }
+//         })
+//         .then(function(responseData) {
+//             les_insectes = responseData['data'];
+//             liste_insectes(pageCourant);
+
+
+//         })
+//         .catch(function(error) {
+//             console.log(error);
+//         });
+
+// });
+
+function createPagination() {
     var totalPages = Math.ceil(les_insectes.length / nbreElementPage);
     var paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = '';
+    paginationContainer.innerHTML = ''; // Effacer le contenu de la pagination
 
-    var maxPageButtons = 10;
+    var maxPageButtons = 10; // Nombre maximum de pages a afficher
+
     var startPage = 1;
     var endPage = totalPages;
-    if (totalPages > maxPageButtons){
-        var  milieuPage = Math/ceil(maxPageButtons / 2);
-        if (pageCourant > milieuPage){
 
-            startPage = pageCourant - milieuPage + 1;
-            endPage = pageCourant +milieuPage -1;
+    if (totalPages > maxPageButtons) {
+        var middlePage = Math.ceil(maxPageButtons / 2);
+        if (pageCourant > middlePage) {
+            startPage = pageCourant - middlePage + 1;
+            endPage = pageCourant + middlePage - 1;
             if (endPage > totalPages) {
                 endPage = totalPages;
-        }
-        else{
-            console.log("");
-        }
+            }
+        } else {
+            //http: //localhost:8009/api/v1/produit/?pattern=BETA
         }
     }
+
     if (startPage > 1) {
         var prevPageItem = document.createElement('li');
         prevPageItem.className = 'page-item';
@@ -186,8 +255,6 @@ function createPagination(){
         nextPageItem.appendChild(nextPageLink);
         paginationContainer.appendChild(nextPageItem);
     }
-    
-
 }
 
 function updatePagination() {
@@ -202,10 +269,3 @@ function updatePagination() {
         }
     });
 }
-
-var insecte = document.getElementsByClassName('img img-responsive img-thumbnail card-img');
-// insecte.addEventListener('click',function(event) =>{
-
-
-// })
-console.log(insecte);
