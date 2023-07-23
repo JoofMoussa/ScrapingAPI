@@ -93,15 +93,33 @@ function liste_insectes(page){
         nom_insecte_Field.className = 'bold text-info';
         nom_insecte_Field.textContent = nom_insecte;
 
+        panierField = document.createElement('h5');
+        var voirDetailBtn = document.createElement('button');
+        voirDetailBtn.className = 'btn button_1';
+        voirDetailBtn.textContent = 'Voir Detail';
+        voirDetailBtn.addEventListener('click', function() {
+            // Get the value to send (e.g., item.id)
+            var valueToSend = item.id;
+
+            // Construct the URL with the value as a query parameter
+            var detailPageUrl = '../detail_insect.html?id=' + valueToSend;
+            console.log(detailPageUrl,'urlllll')
+
+            // Navigate to the detail.html page with the value as a query parameter
+            window.location.href = detailPageUrl;
+        });
+
         cardBody.appendChild(imgcontent);
         cardFooter.appendChild(cardText);
         cardFooter.appendChild(formeField);
         cardFooter.appendChild(nom_insecte_Field);
+        cardFooter.appendChild(voirDetailBtn);
         card.appendChild(cardBody);
         card.appendChild(cardFooter);
 
         cardcontent.appendChild(card);
         cardColumn.appendChild(cardcontent);
+        
         if(line === 4){
             // console.log('ligne :' +line);
             cardby.appendChild(cardColumn);
@@ -157,13 +175,14 @@ document.addEventListener('mouseout',function(event){
 })
 
 
+//  permet d'afficher  un certains nombre d'insectes à partir d'une famille choisie
 
 var classSelect = document.querySelector('#subject');
 
-classSelect.addEventListener('click',function(){
+classSelect.addEventListener('change',function(){
     var optionValue = classSelect.value;
     const url=`api/v1/insecte?pattern=${encodeURIComponent(optionValue)}`;
-    console.log(url);
+    // console.log(url);
     fetch(url)
         .then(function(response){
             if(response.ok){
@@ -185,7 +204,30 @@ classSelect.addEventListener('click',function(){
     
 });
 
-// cette fonction permet d'afficher  un certains nombre d'insectes à partir d'une famille choisie
+
+// rechercher un insecte par son nom
+var nom_insecte =  document.getElementById('rechercheInsecte');
+nom_insecte.addEventListener('submit',function(event){
+    event.preventDefault();// Empecher la soumission du formulaire par défaut
+    var nom_insecte = document.getElementById('nomInsecte').value.toUpperCase();// récupèrer le nom entré dans la recherche puis mettre ça en majuscule
+    fetch('/api/v1/insecte?pattern='+encodeURIComponent(nom_insecte))
+        .then(function(response){
+            if(response.ok){
+                return response.json();// renvoie les données de la réponse en format JSON
+            }
+            else{
+                throw new Error('error in the request')
+            }
+        })
+        .then(function(data_recherche){
+            data = data_recherche['data'];
+            liste_insectes(pageCourant);
+            createPagination();       
+         })
+        .catch(function(error){
+            console.log(error);
+        });
+});
 
 
 

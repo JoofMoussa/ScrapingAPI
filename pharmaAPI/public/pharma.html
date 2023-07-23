@@ -452,7 +452,8 @@
 
             if (password !== confirmPassword) {
                 alert('Les mots de passes sont differents');
-            } else {
+            } 
+            else {
                 var data = {
                     username: username,
                     mot_de_passe: mot_de_passe,
@@ -474,11 +475,21 @@
                         }
                     })
                     .then(function(responseData) {
-                        if (role === 'admin') {
+                        console.log(responseData);
+                        // utiliser le token
+                        const set_token = responseData.token;
+                        localStorage.setItem('token',set_token);
+
+                        // récupérer le token
+                        const get_token = localStorage.getItem('token');
+                        if(get_token){
+                            if (role === 'admin') {
                             window.location.href = '/dashboard.html';
                         } else if (role === 'editor') {
                             window.location.href = '/index.html';
                         } else {}
+                        }
+                        
                     })
                     .catch(function(error) {
                         console.error(error);
@@ -719,6 +730,7 @@
                 voirDetailBtn.addEventListener('click', function() {
                     // Get the value to send (e.g., item.id)
                     var valueToSend = item.id;
+                 
 
                     // Construct the URL with the value as a query parameter
                     var detailPageUrl = 'detail.html?id=' + valueToSend;

@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/insecte.js"></script>
+    
 </head>
 
 
@@ -159,17 +159,17 @@
             <div class="row">
                 <div class="shop_1 clearfix">
                     <div class="col-sm-3 bg_1"><!-- la partie gauche qui est la recherche -->
-                        <!-- <div class="shop_1l1 clearfix">
-                            <h3 class="col_1 mgt">Rechercher un produit</h3>
-                            <form id="rechercheProduit">
+                        <div class="shop_1l1 clearfix">
+                            <h3 class="col_1 mgt">Rechercher un Insecte</h3>
+                            <form id="rechercheInsecte">
                                 <div class="input-group">
-                                    <input type="text" id="nomprod" name="nomprod" class="form-control" placeholder="Chercher">
+                                    <input type="text" id="nomInsecte" name="nomInsecte" class="form-control" placeholder="Chercher">
                                     <span class="input-group-btn">
 								<button class="btn btn-primary" type="submit">
 									Go</button></span>
                                 </div>
                             </form>
-                        </div> -->
+                        </div> 
                         <!-- <br>
                         <div class="shop_1l mgt clearfix">
                             <h3 class="mgt col_1">Categories Produits</h3>
@@ -222,9 +222,16 @@
                     <div class="col-sm-9"><!-- la partie droite affichage des insectes-->
                         <div class="shop_1r clearfix">
                             <div class="col-sm-6 space_left">
-                                <h1 class="mgt text-success">Insecte</h1>
+                                <h1 class="mgt text-success">Famille Insecte</h1>
                                 <select class="form-control" id="subject" name="subject">
-								<option>Tri par defaut</option>
+                                 
+                                    <option type="placeholder">Choisir une famille</option>
+                                    <option>Cicadellidae</option>
+                                    <option>Delphacidae</option>
+                                    <option>Machaerotidae</option>
+                                    <option>Cixiidae</option>
+                                    <option>Flatidae</option>
+                                    <option>Aphrophoridae</option>
 								</select>
                             </div>
                             <div class="col-sm-4 space_left">
@@ -386,7 +393,7 @@
         </div>
     </section>
 
-
+    <script src="js/insecte.js"></script>
 
 </body>
 

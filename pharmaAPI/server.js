@@ -3,11 +3,12 @@ const { Pool } = require('pg');
 const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const { error } = require('console');
 
 
 
 const app = express();
-const port = 8021; // Changement du port
+const port = 8011; // Changement du port
 
 app.use(bodyParser.json());
 
@@ -355,16 +356,20 @@ app.post('/api/login', async(req, res) => {
             } else if (user.est_editeur) {
                 data.role = 'editor';
             }
+            // stocker les informations de session dans le token d'authentification
+            const token = jwt.sign({username:user.username,editeur:user.est_editeur,admin:user.est_admin},'secret-key',{expiresIn:'1h'});
+            // ajouter le token 
+            res.status(200).json({message:"information utilisateur récupéré avec succès.",token})
 
             // Send the data as JSON response
             res.json(data);
+
         })
         .catch(error => {
             console.error('Erreur pendant la connexion:', error);
             res.status(500).json({ error: 'Une erreur est survenue pendant la connexion.' });
         });
 });
-
 
 
 // recuperer tout les  formes de medicaments
@@ -533,7 +538,7 @@ app.route('/api/v1/:table')
             query = 'SELECT id, image, modele, prix, conditionnement, forme, specialites FROM produit';
             nomTable = 'produit';
         } else if (table === 'insecte') {
-            query = 'SELECT * FROM insecte';
+            query = 'SELECT * FROM insecte ';
             nomTable = 'insecte';
         } else {
             return res.status(404).json({ error: 'Table not found.' });
@@ -547,10 +552,12 @@ app.route('/api/v1/:table')
             } else if (nomTable === 'medicament') {
                 query += ` WHERE nom_generique LIKE '%${pattern}%' OR nom_standard LIKE '%${pattern}%'`;
             } else if (nomTable === 'insecte') {
-                query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
+                query += `WHERE nom LIKE '%${pattern}%' OR famille LIKE '%${pattern}%'`;
             } else if (nomTable === 'produit') {
                 query += ` WHERE forme LIKE '%${pattern}%' OR modele LIKE '%${pattern}%'`;
             }
+
+            
         }
 
         pool.query(query, (error, results) => {
@@ -785,6 +792,48 @@ app.route('/api/v1/:table')
             });
     });
 
+
+app.get('api/v1/insecte/:famille',(req,res) =>{
+    const famille = req.params.famille;
+    pool.query('select * from insecte where famille = $1',[famille])
+        .then(response => {
+            const data = response.rows;
+            res.json(data);
+        })
+        .catch(error =>{
+            console.log('erreur lors de la récupération');
+            res.status(500).json({error: 'une erreur est apparue'});
+        });      
+})   
+
+// récupérer un insecte par son identofiant(id)
+
+app.get('/api/v1/insecte/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+
+        const client = await pool.connect();
+        const query = 'SELECT * FROM insecte WHERE id = $1';
+        const result = await client.query(query, [id]);
+        client.release();
+
+        const row = result.rows[0];
+
+        res.json(row);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+// Importez les dépendances nécessaires et configurez votre application Express
+
+
+
+
+  
 //###################  endpoints Insectes  #################################################
 
 // *********    création des endpoits avec les verbes(get,post,put,delete,putch)   *************
@@ -793,6 +842,8 @@ app.route('/api/v1/:table')
 
 
 // recuperer un insecte par son identifiant
+
+
 app.get('/P5_groupe1/API/insecte/:id', (req, res) => {
     const id = req.params.id;
 
