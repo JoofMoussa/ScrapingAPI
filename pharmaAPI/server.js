@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // creation de la connexion a postgres
 const pool = new Pool({
-    user: 'defaultuser2',
+    user: 'musajoof',
     host: 'localhost',
     database: 'sunuapi',
     password: 'root123'
