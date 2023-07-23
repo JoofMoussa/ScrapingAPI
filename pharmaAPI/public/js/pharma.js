@@ -32,56 +32,6 @@ function addForme() {
 
 
 
-document.getElementById('dropdownMenuButton').addEventListener('click', function(event) {
-    event.preventDefault();
-});
-
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // 
-
-    var username = document.getElementById('username').value;
-    var mot_de_passe = document.getElementById('password').value;
-    var role = document.getElementById('role').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-
-    if (password !== confirmPassword) {
-        alert('Les mots de passes sont differents');
-    } else {
-        var data = {
-            username: username,
-            mot_de_passe: mot_de_passe,
-            role: role
-        };
-
-        fetch('/api/v1/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('An error occurred');
-                }
-            })
-            .then(function(responseData) {
-                if (role === 'admin') {
-                    window.location.href = '/dashboard.html';
-                } else if (role === 'editor') {
-                    window.location.href = '/index.html';
-                } else {}
-            })
-            .catch(function(error) {
-                console.error(error);
-            });
-    }
-});
-
-
-
 fetch('/api/v1/produit')
     .then(function(response) {
         if (response.ok) {
@@ -162,7 +112,7 @@ function filterSelect() {
             data = responseData['data'];
             //nomtable = responseData['nomTable'];
             // Traitement des données de réponse
-            console.log(data); // Affiche les données dans la console
+            console.log(responseData); // Affiche les données dans la console
             displayData(currentPage);
             createPagination();
         })
@@ -206,7 +156,7 @@ function showCategories() {
         eltslink.textContent = categorie;
 
         var spaninfo = document.createElement('span');
-        spaninfo.className = 'badge badge-info pull-right';
+        spaninfo.className = 'badge pull-right';
         spaninfo.textContent = '20';
 
         eltcontainer.appendChild(elts);
@@ -322,7 +272,6 @@ function displayData(page) {
         });
 
         cardBody.appendChild(imgcontent);
-
         cardFooter.appendChild(cardText);
         cardFooter.appendChild(formeField);
         cardFooter.appendChild(modeleField);
@@ -366,9 +315,9 @@ function createPagination() {
             if (endPage > totalPages) {
                 endPage = totalPages;
             }
-        } else {
-            //http: //localhost:8009/api/v1/produit/?pattern=BETA
-        }
+        } // else {
+        //http: //localhost:8009/api/v1/produit/?pattern=BETA
+        //}
     }
 
     if (startPage > 1) {
@@ -388,7 +337,8 @@ function createPagination() {
         paginationContainer.appendChild(prevPageItem);
     }
 
-    for (var i = startPage; i <= endPage; i++) {
+
+    for (var i = startPage; i < endPage; i++) {
         var pageItem = document.createElement('li');
         pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
         var pageLink = document.createElement('a');

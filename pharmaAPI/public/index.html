@@ -9,11 +9,12 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/global.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/config.js"></script>
 </head>
 <style>
     .show {
@@ -91,7 +92,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.html"><span class="bold greenyel" >BI<i class="fa fa-globe text-success greenyel"></i></span>DATA</a>
+                            <a class="navbar-brand" href="index.html"><span class="bold greenyel" >BI<i class="fa fa-earth-africa text-green"></i></span>DATA</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -232,7 +233,7 @@
                     <div class="serv_h1 row">
                         <div class="col-sm-4">
                             <div class="serv_h1i text-center clearfix">
-                                <span><i class="fa fa-bar-chart"></i></span>
+                                <span><i class="fa fa-pills"></i></span>
                                 <h4>600 Medicaments</h4>
                                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, voluptatum ea ipsam laudantium esse dolor deleniti exercitationem autem vel debitis commodi facilis non iusto.
                                 </p>
@@ -241,16 +242,16 @@
 
                         <div class="col-sm-4">
                             <div class="serv_h1i text-center clearfix">
-                                <span><i class="fa fa-bar-chart"></i></span>
-                                <h4>30 donnees Meteo</h4>
+                                <span><i class="fa fa-cloud"></i></span>
+                                <h4>11 donnees Meteo</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. similique iusto aspernatur possimus, tenetur, ipsum deleniti nam optio id, laborum ea quia atque voluptas earum!
                                 </p>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="serv_h1i text-center clearfix">
-                                <span><i class="fa fa-bar-chart"></i></span>
-                                <h4>210 insectes</h4>
+                                <span><i class="fa fa-spider"></i></span>
+                                <h4>485 insectes</h4>
                                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. recusandae assumenda animi tempora possimus saepe veritatis adipisci fuga error a nemo quibusdam dolore consequatur?
                                 </p>
                             </div>
@@ -282,7 +283,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="serv_home_2i clearfix">
-                            <span><i class="fa fa-cloud"></i></span>
+                            <span><i class="fa fa-cloud-sun"></i></span>
                             <h4 class="bold">Meteo</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus illo aliquam asperiores fugit? At deserunt possimus itaque optio necessitatibus ipsa, molestias quaerat modi quasi officiis accusamus! Sequi adipisci ad dolores.</p>
                             <h5><a class="button mgt" href="#">Explore Now</a></h5>
@@ -290,7 +291,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="serv_home_2i clearfix">
-                            <span><i class="fa fa-paw"></i></span>
+                            <span><i class="fa fa-bugs"></i></span>
                             <h4 class="bold">Insecte</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis et possimus, doloremque aliquam quidem magni voluptas dicta, ipsa rem repellendus modi? Dolorum pariatur deleniti ea, esse optio ut nihil cum?.</p>
                             <h5><a class="button mgt" href="#">Explore Now</a></h5>
@@ -358,12 +359,12 @@
                                 <h3 class="text-light">
                                     <span>GitHub 
                                         <a class="btn" href="#">
-                                            <i class="fa fa-2x fa-github"></i>
+                                            <i class="fa-brands fa-2x fa-github"></i>
                                         </a>
                                     </span>
                                     <span>Trello 
                                         <a class="btn" href="#">
-                                            <i class="fa fa-2x fa-trello"></i>
+                                            <i class="fa-brands fa-2x fa-trello"></i>
                                         </a>
                                     </span>
                                 </h3>
@@ -497,199 +498,6 @@
                 }
             });
 
-        });
-
-
-        //espace inscription
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchUserData();
-            document.getElementById('logoutButton').addEventListener('click', logout);
-        });
-
-        function fetchUserData() {
-            fetch('/api/v1/utilisateur')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to fetch user data');
-                    }
-                })
-                .then(data => {
-                    const userDataElement = document.getElementById('userDataConnect');
-                    if (data.role === 'admin') {
-                        userDataElement.textContent = `Welcome, Admin! Username: ${data.username}`;
-                    } else if (data.role === 'editor') {
-                        userDataElement.textContent = `Welcome, Editor! Username: ${data.username}`;
-                    } else {
-                        userDataElement.textContent = `Welcome, Visitor! Username: ${data.username}`;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-        function logout() {
-            fetch('/api/logout', {
-                    method: 'POST'
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Redirect to login page or perform any other desired action
-                        window.location.href = '/login.html';
-                    } else {
-                        throw new Error('Logout failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('loginForm');
-
-            loginForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                const formData = {
-                    username: username,
-                    password: password
-                };
-
-                console.log(formData);
-                // Send a POST request to the server
-                fetch('/api/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        } else {
-                            throw new Error('connection echouee');
-                        }
-                    })
-                    .then(data => {
-
-                        if (data.role === 'admin') {
-                            // Redirect admin to dashboard.html
-                            window.location.href = '/admin/dashboard.html';
-                        } else if (data.role === 'editor') {
-                            // Redirect editor to index.html with suggest option
-                            window.location.href = '/editeur/index.html?username=' + formData['username'];
-                        } else {
-                            // Redirect visitor to index.html
-                            window.location.href = '/index.html';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Echec connexion:', error);
-                        alert('connection echouee. Reesayer!!!');
-                    });
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchUserData();
-        });
-
-        function fetchUserData() {
-            // Fait une requête AJAX vers l'API route pour récupérer les données de l'utilisateur connecté
-            fetch('/api/login')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to fetch user data');
-                    }
-                })
-                .then(data => {
-                    // Sélectionne les éléments DOM réutilisés
-                    const connectionDropdown = document.getElementById('dropdownMenuButton');
-                    const userDataElement = document.getElementById('userDataConnect');
-
-                    // Vérifie si data.role est défini avant d'accéder à ses propriétés
-                    if (data && data.role) {
-                        if (data.role === 'admin') {
-                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
-                            console.log(`Bienvenue :  ${data.username}`);
-                        } else if (data.role === 'editor') {
-                            userDataElement.textContent = `Bienvenue :  ${data.username}`;
-                            // Utilise des classes CSS pour masquer et afficher les éléments
-                            connectionDropdown.style.display = 'none';
-                            connectionDropdown.querySelector('.button').classList.remove('button');
-                            connectionDropdown.querySelector('a').classList.add('dropdown-toggle');
-                            connectionDropdown.querySelector('a').setAttribute('role', 'button');
-                            connectionDropdown.querySelector('a').setAttribute('data-toggle', 'dropdown');
-                            connectionDropdown.querySelector('a').setAttribute('aria-haspopup', 'true');
-                            connectionDropdown.querySelector('a').setAttribute('aria-expanded', 'false');
-                        } else {
-                            userDataElement.textContent = `Bienvenue : ${data.username}`;
-                            // Utilise des classes CSS pour masquer et afficher les éléments
-                            connectionDropdown.style.display = 'none';
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('inscriptionClient');
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent form from being submitted normally
-
-                const username = document.getElementById('user_insc').value.trim();
-                const mot_de_passe = document.getElementById('passw_insc').value.trim();
-                const confirmPassword = document.getElementById('confirmPassword').value.trim();
-                const est_admin = false;
-                const est_editeur = false;
-                console.log(mot_de_passe);
-                console.log(confirmPassword);
-
-                // Check if passwords match
-                if (password !== confirmPassword) {
-                    console.log("Les mots de passes sont differents");
-                    return;
-                }
-
-                const formData = {
-                    username: username,
-                    mot_de_passe: mot_de_passe,
-                    est_admin: est_admin,
-                    est_editeur: est_editeur
-                };
-
-                // Send an HTTP POST request to the server
-                fetch('/api/v1/utilisateur', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Utilisateur Cree:', data);
-                        // Optionally, perform any additional actions suh as showing a success message or redirecting to another page
-                    })
-                    .catch(error => {
-                        console.error('Erreur de creation de L utilisateur:', error);
-                    });
-            });
         });
     </script>
 </body>

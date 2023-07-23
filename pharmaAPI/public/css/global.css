@@ -13,9 +13,13 @@ h6 {
     color: #000;
 }
 
+.bshadow {
+    box-shadow: 1px 1px 1px 1px black;
+}
+
 .card-img {
-    inline-size: 80%;
-    block-size: 240px;
+    inline-size: 95%;
+    block-size: 250px;
     object-fit: cover;
 }
 

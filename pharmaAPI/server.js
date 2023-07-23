@@ -61,6 +61,17 @@ app.post('/inscription', async(req, res) => {
     }
 });
 
+// Récupérer toutes les données météo
+app.get('/donne_meteo', (req, res) => {
+    pool.query('SELECT * FROM donne_meteo', (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Erreur lors de la récupération des données météo.' });
+        } else {
+            res.json(results.rows);
+        }
+    });
+});
 
 
 // Route de connexion de l'utilisateur
@@ -538,6 +549,21 @@ app.route('/api/v1/produits/count')
         });
     });
 
+app.route('/api/v1/donne_meteo/count')
+    .get((req, res) => {
+        const query = 'SELECT COUNT(*) AS mCount FROM donne_meteo';
+
+        pool.query(query, (error, results) => {
+            if (error) {
+                console.error('Erreur de decompte:', error);
+                res.status(500).json({ error: 'UNE ERREUR EST APPARUE.' });
+            } else {
+                const mCount = results.rows[0].mcount;
+                res.json({ mCount });
+            }
+        });
+    });
+
 app.route('/api/v1/insectes/count')
     .get((req, res) => {
         const query = 'SELECT COUNT(*) AS insecteCount FROM insecte';
@@ -580,6 +606,11 @@ app.route('/api/v1/:table')
         } else if (table === 'insecte') {
             query = 'SELECT * FROM insecte';
             nomTable = 'insecte';
+
+        } else if (table === 'donne_meteo') {
+            query = 'SELECT * FROM donne_meteo';
+            nomTable = 'donne_meteo';
+
         } else {
             return res.status(404).json({ error: 'Table not found.' });
         }
@@ -597,6 +628,8 @@ app.route('/api/v1/:table')
                 query += ` WHERE forme LIKE '%${pattern}%' OR modele LIKE '%${pattern}%'`;
             } else if (nomTable === 'insecte') {
                 query += `WHERE UPPER(nom) LIKE '%${pattern}%' OR UPPER(famille) LIKE '%${pattern}%'`;
+            } else if (nomTable === 'donne_meteo') {
+                query += ` WHERE UPPER(region) LIKE '%${pattern}%'`;
             }
 
         }
@@ -699,8 +732,21 @@ app.route('/api/v1/:table')
                     console.error('erreur lors de la creation d insecte:', error);
                     res.status(500).json({ error: 'An error occurred while creating the insect.' });
                 });
+        } else if (table === 'donne_meteo') {
+            const { region, temperature_max_jour, temperature_max_nuit, heure_soleil, jour_pluie, precipitation, image } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+
+            pool.query(
+                    'INSERT INTO donne_meteo (region, temperature_max_jour, temperature_max_nuit, heure_soleil, jour_pluie, precipitation, image) VALUES ($1, $2, $3, $4, $5, $6,$7)', [region, temperature_max_jour, temperature_max_nuit, heure_soleil, jour_pluie, precipitation, image]
+                )
+                .then(() => {
+                    res.status(201).json({ message: 'création donnee réussi.' });
+                })
+                .catch(error => {
+                    console.error('erreur lors de la creation de donnee meteo:', error);
+                    res.status(500).json({ error: 'An error occurred while creating the meteo data' });
+                });
         } else {
-            return res.status(404).json({ error: 'Table not found.' });
+            return res.status(404).json({ error: 'Table pas trouve.' });
         }
     })
     .put((req, res) => {
@@ -790,8 +836,22 @@ app.route('/api/v1/:table')
                     console.error('erreur de mise à jour insecte', error);
                     res.status(500).json({ error: 'An error occurred while updating the insect.' });
                 });
+        } else if (nomTable === 'donne_meteo') {
+
+            const id = req.params.id;
+            const { region, temperature_max_jour, temperature_max_nuit, heure_soleil, jour_pluie, precipitation, image } = req.body; //req.body est un objet qui contient les données envoyées avec la requéte POST
+            pool.query(
+                    'UPDATE donne_meteo SET region = $1,temperature_max_jour = $2, temperature_max_nuit = $3, heure_soleil= $4, jour_pluie = $5, precipitation = $6, image = $7 WHERE id = $8', [region, temperature_max_jour, temperature_max_nuit, heure_soleil, jour_pluie, precipitation, image]
+                )
+                .then(() => {
+                    res.json({ message: `climat avec id ${id} a été mise à jour` });
+                })
+                .catch(error => {
+                    console.error('erreur de mise à jour meteo', error);
+                    res.status(500).json({ error: 'An error occurred while updating the meteo data.' });
+                });
         } else {
-            return res.status(404).json({ error: 'Table not found.' });
+            return res.status(404).json({ error: 'Table pas trouve.' });
         }
     })
     .delete((req, res) => {
@@ -819,13 +879,16 @@ app.route('/api/v1/:table')
         } else if (table === 'insecte') {
             query = 'DELETE FROM insecte WHERE id = $1';
             nomTable = 'insecte';
+        } else if (table === 'donne_meteo') {
+            query = 'DELETE FROM donne_meteo WHERE id = $1';
+            nomTable = 'donne_meteo';
         } else {
-            return res.status(404).json({ error: 'Table not found.' });
+            return res.status(404).json({ error: 'Table pas trouve.' });
         }
 
         pool.query(query, [id])
             .then(() => {
-                res.json({ message: `${nomTable} with ID ${id} deleted successfully.` });
+                res.json({ message: `${nomTable} with ID ${id} efface avec success.` });
             })
             .catch(error => {
                 console.error(`Error deleting ${nomTable}:`, error);
